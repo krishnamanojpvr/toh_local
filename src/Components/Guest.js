@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 // import {useNavigate } from 'react-router-dom'
-export default function Guest() {
+export default function Guest(props) {
+    props.setSignInButton(true);
     // const navigate = useNavigate();
     return (
    <div className="parentg">
@@ -17,7 +18,7 @@ export default function Guest() {
                     </div>
                 
             <div className="col-sm-6 mt-4 mb-2">
-            <Link to="/home"><button className="btn btn-dark backb">Go Back</button></Link>
+            <Link to="/"><button className="btn btn-dark backb">Go Back</button></Link>
             </div>
             </div>
         </div>

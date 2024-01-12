@@ -5,31 +5,6 @@ export default function TollStart(props) {
     props.setSignInButton(false);
     return (
         <div className="container ">
-            <div className="mb-4">
-                <button type="button" id="TollLog" className="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    LOG OUT
-                </button>
-            </div>
-
-            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="exampleModalLabel">WARNING!!!</h1>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div className="modal-body">
-                            Are you sure about that?
-                        </div>
-                        <div className="modal-footer">
-                            <Link to="/toll">
-                                <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Yes, Log Out</button>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div className="mt-5 d-flex flex-column justify-content-center align-items-center">
                 <h2 style={{ fontFamily: "sans-serif" }}>Toll Plaza: {props.selectedToll}</h2>
                 <div className="mt-4">

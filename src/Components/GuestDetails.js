@@ -2,7 +2,8 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function GuestDetails() {
+export default function GuestDetails(props) {
+    props.setSignInButton(true);
 
 
     const [vno, setVNo] = useState('');

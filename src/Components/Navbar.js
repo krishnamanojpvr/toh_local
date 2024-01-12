@@ -18,15 +18,15 @@ export default function Navbar({signInButton}) {
           <Link className="nav-link" to="/faq">FAQ</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/Stats">Statistics</Link>
+          <Link className="nav-link" to="/stats">Statistics</Link>
         </li>
       </ul>
       {signInButton && (<form className="nav-item">
-        <Link className="btn btn-outline-light" to="/toll">Toll Sign In</Link>
+        <Link className="btn btn-light btn-outline-dark" to="/toll">Toll Sign In</Link>
       </form>)}
       
       {!signInButton && (<form className="nav-item">
-        <Link className="btn btn-outline-light" to="/toll">Toll Sign Out</Link>
+        <Link className="btn btn-danger" to="/toll">Sign Out</Link>
       </form>)}
     </div>
   </div>

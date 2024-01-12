@@ -20,12 +20,29 @@ const app = express();
 const blobUtil = require('blob-util');
 const twilio = require('twilio');
 
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const TollPlaza = require('./models/TollPlazaSch');
 
 // ^ defining port
 const port = 4000;
 
 // ^ CORS 
 app.use(cors());
+
+//  & JWT
+app.use(cookieParser());
+app.use(session({
+  secret: 'your_secret_key',
+  resave: true,
+  saveUninitialized:true
+}));
+
+const createToken = (id) =>{
+  return jwt.sign({id},'TiresOnHighway')
+}
 
 // & Multer config for TollUpload
 const TollUp = multer.memoryStorage();
@@ -191,8 +208,8 @@ app.get('/guestDet', async (req, res) => {
 app.get('/checkRecords', async (req, res) => {
 
   try {
-    date = req.query.date;
-    tollPlaza = req.query.tollPlaza;
+    const date = req.query.date;
+    const tollPlaza = req.query.tollPlaza;
     console.log(date);
 
     try {
@@ -225,9 +242,8 @@ app.get('/checkRecords', async (req, res) => {
 app.get('/getIm', async (req, res) => {
 
   try {
-    date = req.query.date;
-    tollPlaza = req.query.tollPlaza;
-    vehicleNumber = req.query.vehicleNumber;
+
+    const {date , tollPlaza , vehicleNumber} = req.query;
     console.log(date);
     const list = [];
     try {
@@ -249,5 +265,46 @@ app.get('/getIm', async (req, res) => {
   }
 
 });
+
+
+
+
+app.post('/login',Tollupload.any(),async (req,res) => {
+  const {toll , password} = req.body;
+  try{
+  const user = await TollPlaza.findOne({username : toll});
+  console.log(user);
+  if(user){
+    try{
+      const passMatch = await bcrypt.compare(password,user.password);
+      if(passMatch){
+        console.log("Success");
+        try{
+          const token = createToken(user._id);
+          res.cookie('Authenticated', token, { httpOnly: true, maxAge: 60 * 60 * 60 * 60 * 1000,  secure:true });
+          console.log(token);
+          res.send("Success");
+        }catch(err){
+          console.log(err);
+        }
+      }
+      else{
+        console.log("Not Allowed");
+        res.send("Not Allowed");
+      }
+      
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+
+  }
+  catch(err){
+    console.log(err);
+  }
+});
+
+
 // ^ Server listening on port 4000
 app.listen(port, () => console.log(`Server is listening on port ${port}`));

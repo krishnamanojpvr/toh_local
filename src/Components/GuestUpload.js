@@ -3,7 +3,8 @@ import { useState } from "react";
 import axios from "axios";
 import Loader from './Loader.js';
 
-export default function GuestUpload() {
+export default function GuestUpload(props) {
+    props.setSignInButton(true);
     // console.log(window.location.pathname);
     // console.log(window.location.origin);
     // console.log(window.location.href);

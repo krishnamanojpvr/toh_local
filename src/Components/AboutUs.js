@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-export default function AboutUs() {
+export default function AboutUs(props) {
+  props.setSignInButton(true);
   return (
-
     <div className="AboutUs">
       <div className="row row-cols-1 row-cols-sm-2 g-4">
         <div className="col">
