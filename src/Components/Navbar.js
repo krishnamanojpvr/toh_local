@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-export default function Navbar({ signInButton }) {
+export default function Navbar({ signInButton}) {
   const navigate = useNavigate()
   const handleLogOut = async (e) => {
     e.preventDefault()

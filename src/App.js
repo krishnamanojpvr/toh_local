@@ -1,4 +1,5 @@
 import React from 'react';
+// import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import TollStart from './Components/TollStart';
@@ -25,16 +26,24 @@ import './stylesheet.css';
 import './street_cred-webfont.woff';
 import './street_cred-webfont.woff2';
 
-const NotFound = (props) => 
-props.setSignInButton(true);
+const NotFound = (props) =>(
+  // props.setSignInButton(true);
 <h1>404 Error.
   The page you are looking for does not exist
-</h1>;
+</h1>)
+
+// const NoAccess = (props) =>(
+//   // props.setSignInButton(true);
+//     <div>
+//     <h2>Access Denied, Please Sign In to continue</h2>
+//     <Link to="/toll" type="button" className="btn btn-dark mx-2">Toll Sign In</Link>
+//     </div>)
 
 
 function App() {
   const [selectedToll, setSelectedToll] = useState('');
-  const [signInButton,setSignInButton] = useState(true);
+  const [signInButton, setSignInButton] = useState(true);
+  // const [access, setAccess] = useState(false);
 
   useEffect(() => {
     const storedToll = localStorage.getItem('selectedToll');
@@ -47,38 +56,25 @@ function App() {
     localStorage.setItem('selectedToll', selectedToll);
   }, [selectedToll]);
 
-
-
-  // useEffect(() => {
-  //   const storedButton = localStorage.getItem('signInButton');
-  //   if (storedButton) {
-  //     setSignInButton(storedButton);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem('signInButton', signInButton);
-  // }, [signInButton]);
-
-
-
-
   return (
     <>
       <Router>
-        <Navbar signInButton={signInButton} setSignInButton={setSignInButton} />
+        <Navbar signInButton={signInButton}  />
         <Routes>
-        <Route path='/' element={<Home setSignInButton={setSignInButton} />} />
-          <Route path='/loader' element={<Loader />} /> 
-          <Route path='/aboutus' element={<AboutUs setSignInButton={setSignInButton}/>} /> 
+          <Route path='/' element={<Home setSignInButton={setSignInButton} />} />
+          <Route path='/loader' element={<Loader />} />
+          <Route path='/aboutus' element={<AboutUs setSignInButton={setSignInButton} />} />
+
           <Route path='/toll' element={<TollLogin selectedToll={selectedToll} setSelectedToll={setSelectedToll} setSignInButton={setSignInButton} />} />
-          <Route path='/toll/start' element={<TollStart selectedToll={selectedToll} setSignInButton={setSignInButton}/>} />
-          <Route path='/toll/upload' element={<TollUpload selectedToll={selectedToll} setSignInButton={setSignInButton} />}  />
-          <Route path='/guest' element={<Guest setSignInButton={setSignInButton}/>} />
+          <Route path='/toll/start' element={<TollStart selectedToll={selectedToll}  setSignInButton={setSignInButton} />} />
+          <Route path='/toll/upload' element={<TollUpload selectedToll={selectedToll} setSignInButton={setSignInButton} />} />
+          <Route path='/toll/checkrecords' element={<CheckRecords selectedToll={selectedToll} setSignInButton={setSignInButton} />} />
+
+
+          <Route path='/guest' element={<Guest setSignInButton={setSignInButton} />} />
           <Route path='/guest/upload' element={<GuestUpload setSignInButton={setSignInButton} />} />
-          <Route path='/guest/checkdetails' element={<GuestDetails setSignInButton={setSignInButton}/>} />
-          <Route path='/toll/checkrecords' element={<CheckRecords selectedToll={selectedToll} setSignInButton={setSignInButton}/>} />
-          <Route path='*' element={<NotFound setSignInButton={setSignInButton}/>}/>
+          <Route path='/guest/checkdetails' element={<GuestDetails setSignInButton={setSignInButton} />} />
+          <Route path='*' element={<NotFound setSignInButton={setSignInButton} />} />
         </Routes>
         {/* <Footer setSignInButton={setSignInButton}/> */}
       </Router>

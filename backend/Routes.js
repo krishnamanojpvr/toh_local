@@ -7,26 +7,6 @@
 // ? for random
 
 
-// try{
-//   const accountSid = 'AC47aad9efb59c476057c03e1e8b2ebace';
-//   const authToken = 'a8ff2103eb0f7ad7b4322374a1ea126e';
-//   const client = require('twilio')(accountSid, authToken);
-
-//   client.messages
-//       .create({
-//           from: '+13344543086',
-//           to: '+91'+userMobileNumber,
-//           body: Your vehicle with number ${vehicleNumber} has a ${tollFlaskResponse} tyre.
-//       })
-//       .then(message => console.log(message.sid))
-//       .done();
-
-// }catch(err){
-//   console.log('SMS NOT SENT');
-// }
-
-
-
 // ! Routes.js
 // ^ importing modules
 
@@ -38,7 +18,7 @@ const axios = require('axios');
 const TollData = require('./models/TollDataSch');
 const app = express();
 const blobUtil = require('blob-util');
-// const twilio = require('twilio');
+const twilio = require('twilio');
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -62,10 +42,11 @@ app.use(cookieParser());
 //   secret: 'your_secret_key',
 //   resave: true,
 //   saveUninitialized:true
+  
 // }));
  
 const createToken = (id) =>{
-  return jwt.sign({id},'TiresOnHighway',{expiresIn: "1h"});
+  return jwt.sign({id},'TiresOnHighway',{expiresIn: 60* 60 * 1000 });
 }
 
 // & Multer config for TollUpload
@@ -140,6 +121,24 @@ app.post('/tollupload', auth, Tollupload.any(), async (req, res) => {
         tollPlaza: tollPlaza,
 
       });
+
+      try{
+        const accountSid = 'AC47aad9efb59c476057c03e1e8b2ebace';
+        const authToken = 'a8ff2103eb0f7ad7b4322374a1ea126e';
+        const client = twilio(accountSid, authToken);
+      
+        client.messages
+            .create({
+                from: '+13344543086',
+                to: '+91'+userMobileNumber,
+                body: `Your vehicle with number ${vehicleNumber} has a ${tollFlaskResponse} tyre.`,
+            })
+            .then(message => console.log(message.sid))
+            .done();
+      
+      }catch(err){
+        console.log('SMS NOT SENT');
+      }
 
       // * saving to mongoDB
       await tollData.save();
@@ -229,7 +228,7 @@ app.get('/guestDet', async (req, res) => {
 
 // ! CheckRecords Route
 
-app.get('/checkRecords',async (req, res) => {
+app.get('/checkRecords',auth,async (req, res) => {
 
   try {
     const date = req.query.date;
@@ -263,7 +262,7 @@ app.get('/checkRecords',async (req, res) => {
 
 });
 
-app.get('/getIm', async (req, res) => {
+app.get('/getIm', auth,async (req, res) => {
 
   try {
 
@@ -304,7 +303,7 @@ app.post('/login',Tollupload.any(),async (req,res) => {
         try{
           const token = createToken(user._id);
           console.log(token);
-          res.cookie('tollLogin', token, {httpOnly:true,  maxAge:  60 * 1000 } );
+          res.cookie('tollLogin', token, {httpOnly:true,  maxAge: 60* 60 * 1000 } );
           // sameSite: 'None'  -> for CORS purposes and controlling the cookie to be sent only to the same origin
           // secure : true -> is not recommended for development purposes as we can't access a cookie using document.cookie in the client side 
           // path: '/' -> to make the cookie available to all the routes

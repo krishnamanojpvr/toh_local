@@ -160,8 +160,8 @@ export default function TollUpload(props) {
           </div>
           <br />
           <div className="image col-9 mt-2 mb-2">   
-            <label htmlFor="TollTireImage" id="TollUploadTire" className="form-label">Upload Tyre :</label>
-            <input type="file" accept='image/*' name="tyre" onChange={handleImageChange} required id="TollTireImage" className='form-control' multiple />
+            <label htmlFor="TollTireImage" id="TollUploadTire" className="form-label">Upload Tire(s) :</label>
+            <input type="file" accept='image/*' name="tyre" onChange={handleImageChange} required id="TollTireImage" maxLength={8} className='form-control' multiple />
           </div>
 
           {loader && <Loader />}
