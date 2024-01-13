@@ -26,7 +26,7 @@ export default function GuestDetails(props) {
 
         console.log("Input : VehicleNo : ", vno);
 
-        const response = await axios.get('http://localhost:4000/guestDet', {
+        const response = await axios.get(`http://${window.location.hostname}:4000/guestDet`, {
             params: {
                 vehicleNumber: vno,
             },

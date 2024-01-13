@@ -115,6 +115,7 @@ export default function TollUpload(props) {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
+          withCredentials: true,
         });
 
         // Handle the response, if needed

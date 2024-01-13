@@ -49,42 +49,31 @@ function App() {
 
 
 
-  useEffect(() => {
-    const storedButton = localStorage.getItem('signInButton');
-    if (storedButton) {
-      setSignInButton(storedButton);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const storedButton = localStorage.getItem('signInButton');
+  //   if (storedButton) {
+  //     setSignInButton(storedButton);
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem('signInButton', signInButton);
-  }, [signInButton]);
+  // useEffect(() => {
+  //   localStorage.setItem('signInButton', signInButton);
+  // }, [signInButton]);
 
 
-  const [Access,setAccess] = useState(false);
-  useEffect(() => {
-    const cookie = document.cookie;
-    console.log(cookie);
-    if(cookie){
-      setAccess(true);
-    }
-    else
-    setAccess(false);
-  }, []);
+
 
   return (
     <>
       <Router>
         <Navbar signInButton={signInButton} setSignInButton={setSignInButton} />
         <Routes>
-        {/* {Access && <Route path='/' element={<Home setSignInButton={setSignInButton} />} />} */}
-        <Route path='/' element={Access ? <Home setSignInButton={setSignInButton} /> : null} />
-
+        <Route path='/' element={<Home setSignInButton={setSignInButton} />} />
           <Route path='/loader' element={<Loader />} /> 
           <Route path='/aboutus' element={<AboutUs setSignInButton={setSignInButton}/>} /> 
           <Route path='/toll' element={<TollLogin selectedToll={selectedToll} setSelectedToll={setSelectedToll} setSignInButton={setSignInButton} />} />
           <Route path='/toll/start' element={<TollStart selectedToll={selectedToll} setSignInButton={setSignInButton}/>} />
-          <Route path='/toll/upload' element={<TollUpload selectedToll={selectedToll} />} setSignInButton={setSignInButton} />
+          <Route path='/toll/upload' element={<TollUpload selectedToll={selectedToll} setSignInButton={setSignInButton} />}  />
           <Route path='/guest' element={<Guest setSignInButton={setSignInButton}/>} />
           <Route path='/guest/upload' element={<GuestUpload setSignInButton={setSignInButton} />} />
           <Route path='/guest/checkdetails' element={<GuestDetails setSignInButton={setSignInButton}/>} />

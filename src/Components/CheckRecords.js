@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Loader from './Loader';
 
 export default function CheckRecords(props) {
   props.setSignInButton(false);
@@ -9,6 +10,7 @@ export default function CheckRecords(props) {
   const [tireStatus, setTireStatus] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [records, setRecords] = useState(0);
+  const [loader, setLoader] = useState(false); // Loader
 
   const date = new Date();
   let m = date.getMonth() + 1;
@@ -20,6 +22,7 @@ export default function CheckRecords(props) {
   const dateS = date.getFullYear() + '-' + m + '-' + String(d);
 
   async function checkDate(e) {
+    setLoader(true);
     e.preventDefault();
     console.log(props.selectedToll)
     try {
@@ -28,8 +31,10 @@ export default function CheckRecords(props) {
           date: dateSub,
           tollPlaza: props.selectedToll,
         },
+        withCredentials: true,
       });
       let a = response.data;
+      setLoader(false);
 
       const tableRows = a.map((item, index) => (
         <tr key={index}>
@@ -66,6 +71,7 @@ export default function CheckRecords(props) {
           tollPlaza: props.selectedToll,
           vehicleNumber: vehicleNumber,
         },
+        withCredentials: true,
       });
       for (let i = 0; i < imageSrcData.data[0].length; i++) {
         imageSrcData.data[0][i] = "data:image/jpeg;base64," + imageSrcData.data[0][i];
@@ -96,17 +102,18 @@ export default function CheckRecords(props) {
         <form onSubmit={checkDate}>
           <label htmlFor='date'>Enter date</label>
           <input type='date' name='date' className='me-3' onChange={handleDateChange} max={dateS} required></input>
-          <input type='submit' className='btn btn-primary' value='Check' />
+          {!loader && <input type='submit' className='btn btn-primary' value='Check' />}
+          {loader && <Loader/>}
         </form>
         <div id='p' className='mt-3 mb-3'></div>
       </div>
+
       <div className=' table-responsive'>
         <table className="table table-light table-bordered">
           <thead>
             <tr>
               <th scope="col">Vehicle Number</th>
               <th scope="col">Mobile Number</th>
-              {/* <th scope="col">Tyre Status</th> */}
               <th scope="col" style={{ width: 'auto' }}>Image</th>
             </tr>
           </thead>
@@ -115,6 +122,7 @@ export default function CheckRecords(props) {
           </tbody>
         </table>
       </div>
+
       {showModal && (
         <div className="modal" style={{ display: 'flex', width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
           <div className="modal-dialog" style={{ width: '100%', margin: 'auto' }}>

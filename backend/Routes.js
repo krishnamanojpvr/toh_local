@@ -7,6 +7,26 @@
 // ? for random
 
 
+// try{
+//   const accountSid = 'AC47aad9efb59c476057c03e1e8b2ebace';
+//   const authToken = 'a8ff2103eb0f7ad7b4322374a1ea126e';
+//   const client = require('twilio')(accountSid, authToken);
+
+//   client.messages
+//       .create({
+//           from: '+13344543086',
+//           to: '+91'+userMobileNumber,
+//           body: Your vehicle with number ${vehicleNumber} has a ${tollFlaskResponse} tyre.
+//       })
+//       .then(message => console.log(message.sid))
+//       .done();
+
+// }catch(err){
+//   console.log('SMS NOT SENT');
+// }
+
+
+
 // ! Routes.js
 // ^ importing modules
 
@@ -18,30 +38,34 @@ const axios = require('axios');
 const TollData = require('./models/TollDataSch');
 const app = express();
 const blobUtil = require('blob-util');
-const twilio = require('twilio');
+// const twilio = require('twilio');
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
-const session = require('express-session');
+// const session = require('express-session');
+const auth = require('./middleware/auth');
 const TollPlaza = require('./models/TollPlazaSch');
 
 // ^ defining port
 const port = 4000;
 
 // ^ CORS 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', 
+  credentials: true,
+}));
 
 //  & JWT
 app.use(cookieParser());
-app.use(session({
-  secret: 'your_secret_key',
-  resave: true,
-  saveUninitialized:true
-}));
-
+// app.use(session({
+//   secret: 'your_secret_key',
+//   resave: true,
+//   saveUninitialized:true
+// }));
+ 
 const createToken = (id) =>{
-  return jwt.sign({id},'TiresOnHighway')
+  return jwt.sign({id},'TiresOnHighway',{expiresIn: "1h"});
 }
 
 // & Multer config for TollUpload
@@ -63,7 +87,7 @@ mongoose.connect("mongodb://localhost:27017/myFirst")
 app.use(express.urlencoded({ extended: true }));
 
 //! TollUpload Route
-app.post('/tollupload', Tollupload.any(), async (req, res) => {
+app.post('/tollupload', auth, Tollupload.any(), async (req, res) => {
   console.log("TollUpload Route");
   // * getting data from request body
   const { vehicleNumber, userMobileNumber, date, tollPlaza } = req.body;
@@ -165,7 +189,7 @@ app.post('/guestUp', Guestupload.any(), async (req, res) => {
       if (guestFlaskResponse["error"]) {
         return res.status(500).send('Bad response from flask api');
       }
-
+      console.log(guestFlaskResponse);
       return res.send(guestFlaskResponse);
     }
 
@@ -205,7 +229,7 @@ app.get('/guestDet', async (req, res) => {
 
 // ! CheckRecords Route
 
-app.get('/checkRecords', async (req, res) => {
+app.get('/checkRecords',async (req, res) => {
 
   try {
     const date = req.query.date;
@@ -267,8 +291,6 @@ app.get('/getIm', async (req, res) => {
 });
 
 
-
-
 app.post('/login',Tollupload.any(),async (req,res) => {
   const {toll , password} = req.body;
   try{
@@ -278,11 +300,16 @@ app.post('/login',Tollupload.any(),async (req,res) => {
     try{
       const passMatch = await bcrypt.compare(password,user.password);
       if(passMatch){
-        console.log("Success");
+        console.log("Password Matched");
         try{
           const token = createToken(user._id);
-          res.cookie('Authenticated', token, { httpOnly: true, maxAge: 60 * 60 * 60 * 60 * 1000,  secure:true });
           console.log(token);
+          res.cookie('tollLogin', token, {httpOnly:true,  maxAge:  60 * 1000 } );
+          // sameSite: 'None'  -> for CORS purposes and controlling the cookie to be sent only to the same origin
+          // secure : true -> is not recommended for development purposes as we can't access a cookie using document.cookie in the client side 
+          // path: '/' -> to make the cookie available to all the routes
+          // domain: `http://${req.hostname}:3000`} -> to make the cookie available to all the subdomains
+          console.log("Success");
           res.send("Success");
         }catch(err){
           console.log(err);
@@ -302,6 +329,20 @@ app.post('/login',Tollupload.any(),async (req,res) => {
   }
   catch(err){
     console.log(err);
+  }
+});
+
+app.get('/logout',(req,res) => {
+  console.log("LogOut Route");
+  const token = req.cookies.tollLogin;
+  if(token){
+    console.log("Token Found");
+    res.clearCookie('tollLogin');
+    res.send("LogOut Success");
+  }
+  else{
+    console.log("Token Not Found");
+    res.send("LoggingOut");
   }
 });
 
