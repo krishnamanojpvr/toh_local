@@ -4,12 +4,13 @@ const auth = async (req, res, next) => {
     try {
         const token = req.cookies.tollLogin;
         console.log(token);
-        const verifyUser = jwt.verify(token,'TiresOnHighway');
-        console.log(verifyUser);
-        req.verifyUser = verifyUser;
+        const verify = jwt.verify(token,'TiresOnHighway');
+        console.log(verify,"Authorised");
+        // req.verifyUser = verifyUser;
         next();
     }
     catch (err) {
+        console.log(err,"Unauthorised");
         res.clearCookie('Authenticated');
         res.status(401).send(err);
     }
