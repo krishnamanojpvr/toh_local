@@ -29,7 +29,7 @@ mongoose.connect("mongodb://localhost:27017/myFirst")
 app.use(express.urlencoded({ extended: true }));
 app.use(router);
 
-router.get('/guestDet', guestDetails);
+router.get('/guestDet' ,guestDetails);
 router.post('/guestUp', guestUpload);
 router.get('/checkRecords', tollCheckRecords);
 router.post('/login', tollLogin);

@@ -21,7 +21,7 @@ const TollUp = multer.memoryStorage();
 const Tollupload = multer({ storage: TollUp, limits: { fieldSize: 25 * 1024 * 1024 } })
 
 //! TollUpload Route
-router.post('/tollupload',Tollupload.any(), async (req, res) => {
+router.post('/tollupload',auth,Tollupload.any(), async (req, res) => {
     console.log("TollUpload Route");
     const { vehicleNumber, userMobileNumber, date, tollPlaza } = req.body;
     const tollBlobArray = [];

@@ -9,7 +9,7 @@ router.use(cors({
 }));
 const auth = async (req, res, next) => {
     try {
-        const token = req.cookies.login;
+        const token = req.cookies.tollLogin;
         console.log(token);
         const verify = jwt.verify(token,'TiresOnHighway');
         console.log(verify,"Authorised");
@@ -17,7 +17,7 @@ const auth = async (req, res, next) => {
     }
     catch (err) {
         console.log(err,"Unauthorised");
-        res.clearCookie('tollLogin');
+        // res.clearCookie('tollLogin');
         res.status(401).send(err);
     }
 }
