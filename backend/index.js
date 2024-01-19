@@ -27,6 +27,7 @@ mongoose.connect("mongodb://localhost:27017/myFirst")
 
 // ^ Express config for parsing request body as JSON
 app.use(express.urlencoded({ extended: true }));
+app.use(router);
 
 router.get('/guestDet', guestDetails);
 router.post('/guestUp', guestUpload);

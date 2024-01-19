@@ -36,7 +36,7 @@ export default function Navbar({ signInButton}) {
           </form>)}
 
           {!signInButton && (<form className="nav-item">
-            <button className="btn btn-danger"onClick={handleLogOut}>Sign Out</button>
+            <Link className="btn btn-danger"onClick={handleLogOut}>Sign Out</Link>
             {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
               Launch demo modal
             </button>

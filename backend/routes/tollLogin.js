@@ -6,12 +6,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-// app.use(session({
-//   secret: 'your_secret_key',
-//   resave: true,
-//   saveUninitialized:true
 
-// }));
+
 // ^ CORS 
 router.use(cors({
     origin: 'http://localhost:3000',
@@ -42,7 +38,7 @@ router.post('/login', Tollupload.any(), async (req, res) => {
             try {
               const token = createToken(user._id);
               console.log(token);
-              res.cookie('tollLogin', token, { httpOnly: true, maxAge: 60 * 60 * 1000 });
+              res.cookie('login', token, { httpOnly: true, maxAge: 60 * 60 * 1000 });
               // sameSite: 'None'  -> for CORS purposes and controlling the cookie to be sent only to the same origin
               // secure : true -> is not recommended for development purposes as we can't access a cookie using document.cookie in the client side 
               // path: '/' -> to make the cookie available to all the routes
