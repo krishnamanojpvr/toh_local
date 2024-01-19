@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState  } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Loader from './Loader';
 
@@ -11,7 +12,7 @@ export default function CheckRecords(props) {
   const [showModal, setShowModal] = useState(false);
   const [records, setRecords] = useState(0);
   const [loader, setLoader] = useState(false); // Loader
-
+  const navigate = useNavigate();
   const date = new Date();
   let m = date.getMonth() + 1;
   let d = date.getDate();
@@ -56,6 +57,7 @@ export default function CheckRecords(props) {
   }
 
   const handleDateChange = (e) => {
+    setLoader(false);
     setDateSub(e.target.value);
   }
 
@@ -92,7 +94,9 @@ export default function CheckRecords(props) {
     setSelectedImage([]);
   }
 
-
+  const goTo = () => {
+    navigate('/toll/start');
+  }
 
   return (
     <div>
@@ -103,6 +107,7 @@ export default function CheckRecords(props) {
           <label htmlFor='date'>Enter date</label>
           <input type='date' name='date' className='me-3' onChange={handleDateChange} max={dateS} required></input>
           {!loader && <input type='submit' className='btn btn-primary' value='Check' />}
+          {!loader && <input type='button' className='btn btn-warning' onClick={goTo} value='Go Back' />}
           {loader && <Loader/>}
         </form>
         <div id='p' className='mt-3 mb-3'></div>

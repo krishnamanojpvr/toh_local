@@ -77,8 +77,8 @@ export default function TollLogin({ setSelectedToll, setSignInButton }) {
   };
 
   return (
-    <div className='container ms-3'>
-      <h1 className='col-12 mt-5'>Tires On Highways</h1>
+    <div className='container ms-6'>
+      <h1 className='col-12 mt-5'>Login to Toll Plaza</h1>
       <form className="col-12 col-md-6">
         <div className='row'>
           <select className="form-select mt-3  w-50" aria-label="Default select example" autoComplete="off" onChange={handleTollChange} required>
@@ -95,14 +95,14 @@ export default function TollLogin({ setSelectedToll, setSignInButton }) {
             <option value="Surat">Surat</option>
           </select>
         </div>
-        <label htmlFor="pwd" style={{ textAlign: "center" }}>
+        <label className="mt-2" htmlFor="pwd" style={{ textAlign: "center" }}>
           Password:
         </label>
         <br />
         <div className='mt-2 mb-2'>
-          <input type="password" id="pwd" className="btn btn-secondary opacity-100" placeholder="Enter Password" required value={pwd} style={{ color: 'black', background: 'white' }} onChange={handlePwdChange} /><span> <input type="checkbox" className="btn btn-primary" id='showPassword' onClick={togglePasswordVisibility} /> Show Password </span>
+          <input type="password" id="pwd" className="btn btn-secondary opacity-100" placeholder="Enter Password" required value={pwd} style={{ color: 'black', background: 'white' }} onChange={handlePwdChange} /><span>    <input type="checkbox" className="btn btn-primary" id='showPassword' onClick={togglePasswordVisibility} /> Show Password </span>
         </div>
-        <div className="row ">
+        <div className="row">
           {displayMessage && <p style={{ color: displayMessage.includes("Invalid") ? "red" : "blue" }}>{displayMessage}</p>}
         </div>
         <div className="input-group mt-1 row">
@@ -114,9 +114,6 @@ export default function TollLogin({ setSelectedToll, setSignInButton }) {
             </Link>
           </div>
           <div className="right col-sm-3">
-            {/* <button type="button" id="LoginSubmit" onClick={handleSubmit} className="btn btn-success mt-0 ">
-                Submit
-              </button> */}
             <input type="submit" value="Submit" className='btn  btn-success mt-1' onClick={handleSubmit} />
           </div>
         </div>

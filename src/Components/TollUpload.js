@@ -158,7 +158,6 @@ export default function TollUpload(props) {
             <label htmlFor="TollUserMobileNo" id="TollUserNo" className="form-label">User Mobile Number</label>
             <input type="number" className="form-control " onChange={handleMNOChange} id="TollUserMobileNo" placeholder="xxxxxxxxxx" required />
           </div>
-          <br />
           <div className="image col-9 mt-2 mb-2">   
             <label htmlFor="TollTireImage" id="TollUploadTire" className="form-label">Upload Tire(s) :</label>
             <input type="file" accept='image/*' name="tyre" onChange={handleImageChange} required id="TollTireImage" maxLength={8} className='form-control' multiple />
@@ -179,7 +178,7 @@ export default function TollUpload(props) {
         </form>           
 
         <div>
-          <Link to="/toll/start"><button type='' id='TollBack' className="btn btn-dark">Go Back</button></Link>
+          <Link to="/toll/start"><button type='' id='TollBack' className="btn btn-warning">Go Back</button></Link>
         </div>
       
     </div>

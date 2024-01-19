@@ -113,7 +113,7 @@ export default function GuestUpload(props) {
                             </div>
                             <div className="col-sm-4">
                                 <Link to="/guest">
-                                    <button className="btn btn-dark back mt-2 mb-2 col " >Go Back</button>
+                                    <button className="btn btn-warning back mt-2 mb-2 col " >Go Back</button>
                                 </Link>
                             </div>
                         </div>

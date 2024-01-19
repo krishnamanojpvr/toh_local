@@ -18,7 +18,7 @@ export default function Guest(props) {
                     </div>
                 
             <div className="col-sm-6 mt-4 mb-2">
-            <Link to="/"><button className="btn btn-dark backb">Go Back</button></Link>
+            <Link to="/"><button className="btn btn-warning backb">Go Back</button></Link>
             </div>
             </div>
         </div>

@@ -69,7 +69,7 @@ export default function GuestDetails(props) {
                         <button type="submit" className="btn btn-dark detSub" id="blackbut">Submit</button>
                         </div>
                         <div className="col-sm-3 mt-2">
-                        <Link to="/guest" ><button type="submit" className="btn btn-dark back">Go Back</button></Link>
+                        <Link to="/guest" ><button type="submit" className="btn btn-warning back">Go Back</button></Link>
                         </div>
                     </div>
                     <br />
