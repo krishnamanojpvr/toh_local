@@ -85,44 +85,5 @@
   "password": "$2b$10$Sz8IrCLYurxaLf7Iifm.WeD6BQ0WDsGajMcbd147S6yGxk427eXSG",
   "username": "Jaipur",
   "__v": 0
-},
-{
-  "_id": {
-    "$oid": "659e36a1d4034cea83a7af7e"
-  },
-  "password": "$2b$10$QkJVCNJzDRADUyEqkgkoVexkiwfeBxeCjDjF4GgYidp50mkIfn22S",
-  "username": "12345",
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "659e36bb7d5ff580a83393d5"
-  },
-  "password": "$2b$10$8SxA5cPFanCAfqIpo0876.Ja/f1KZ2RdEe82wO9v75WZpCsgQj50C",
-  "username": "12345",
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "659e37c75196fc2dd58aa42a"
-  },
-  "password": "$2b$10$npDicYx5ob8YtxWqBs0pAOdmp.C8mSEWY.WXE8rhC6ChiYZVroghe",
-  "username": "12344",
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "659e37dd5196fc2dd58aa42c"
-  },
-  "password": "$2b$10$EvphgT1vwGgiY6aet59yGOG8pS5xE1NwWX.fpQwE.mBDO5/yP/Ep2",
-  "username": "222222",
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "659e37ec13e50a11d44d8a67"
-  },
-  "password": "$2b$10$pK2QX6eQXquxyj2SvtryyO8OCNxr/LYcoI0p8f3VGc5x4nrLuqxJi",
-  "username": "222222",
-  "__v": 0
-}]
+}
+]
