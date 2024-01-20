@@ -10,7 +10,7 @@ export default function AboutUs(props) {
             <img src="..." className="card-img-top" alt="..." />
             <div className="card-body">
               <h5 className="card-title">Varun</h5>
-              <p className="card-text">Naa muddhu peru pettukunna Varun Reddy, Naa inti mundhu penchukunna pacha endugaddi</p>
+              <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis suscipit laboriosam perferendis labore reiciendis accusamus vitae modi porro. Cumque, in.</p>
             </div>
           </div>
         </div>
@@ -19,7 +19,7 @@ export default function AboutUs(props) {
             <img src="..." className="card-img-top" alt="..." />
             <div className="card-body">
               <h5 className="card-title">Shiva</h5>
-              <p className="card-text">Sendhil</p>
+              <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis suscipit laboriosam perferendis labore reiciendis accusamus vitae modi porro. Cumque, in.</p>
             </div>
           </div>
         </div>
@@ -28,7 +28,7 @@ export default function AboutUs(props) {
             <img src="..." className="card-img-top" alt="..." />
             <div className="card-body">
               <h5 className="card-title">Deepak</h5>
-              <p className="card-text">Tire is Black, black is dark, Dark is Me</p>
+              <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis suscipit laboriosam perferendis labore reiciendis accusamus vitae modi porro. Cumque, in.</p>
             </div>
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function AboutUs(props) {
             <img src="..." className="card-img-top" alt="..." />
             <div className="card-body">
               <h5 className="card-title">Gargey</h5>
-              <p className="card-text">Nenu sarada ke practice app uninstall chesinodini. . . , inka nuvvu git repo project antunnav. . . chusko malla</p>
+              <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis suscipit laboriosam perferendis labore reiciendis accusamus vitae modi porro. Cumque, in.</p>
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@ export default function AboutUs(props) {
             <img src="..." className="card-img-top" alt="..." />
             <div className="card-body">
               <h5 className="card-title">Charan</h5>
-              <p className="card-text">my name is 1Z</p>
+              <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis suscipit laboriosam perferendis labore reiciendis accusamus vitae modi porro. Cumque, in.</p>
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@ export default function AboutUs(props) {
             <img src="..." className="card-img-top" alt="..." />
             <div className="card-body">
               <h5 className="card-title">Manoj</h5>
-              <p className="card-text">Hello ra Manoj</p>
+              <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis suscipit laboriosam perferendis labore reiciendis accusamus vitae modi porro. Cumque, in.</p>
             </div>
           </div>
         </div>

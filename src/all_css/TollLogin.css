@@ -31,5 +31,5 @@
     margin-top: 3vw;
 }
 #pwd::placeholder{
-    color: black;
+    color: rgb(33, 31, 31);
 }

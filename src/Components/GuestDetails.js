@@ -66,10 +66,10 @@ export default function GuestDetails(props) {
                     <br></br>
                     <div className="row">
                         <div className="col-sm-3 mt-2">
-                        <button type="submit" className="btn btn-dark detSub" id="blackbut">Submit</button>
+                        <Link to="/guest"><button  className="btn btn-warning back" id="blackbut">Go Back</button></Link>
                         </div>
                         <div className="col-sm-3 mt-2">
-                        <Link to="/guest" ><button type="submit" className="btn btn-warning back">Go Back</button></Link>
+                        <button type="submit" className="btn btn-primary detSub">Submit</button>
                         </div>
                     </div>
                     <br />

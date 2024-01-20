@@ -106,18 +106,20 @@ export default function GuestUpload(props) {
                         </div>
                         <div className="row">
                             <div className="col mt-2 ">
-                                <button type="submit" className="btn btn-dark imageSub" >Submit</button>
-                            </div>
-                            <div className="col mt-2">
-                                {res && <button className="btn btn-dark mb-2 ms-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Result</button>}
-                            </div>
-                            <div className="col-sm-4">
                                 <Link to="/guest">
-                                    <button className="btn btn-warning back mt-2 mb-2 col " >Go Back</button>
+                                    <button className="btn btn-warning imageSub" >Go Back</button>
                                 </Link>
                             </div>
+                            <div className="col mt-2">
+                                {res && <button className="btn btn-success mb-2 ms-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Result</button>}
+                            </div>
+                            <div className="col-sm-4">
+
+                                <button type='submit' className="btn btn-primary back mt-2 mb-2 col " >Submit</button>
+
+                            </div>
                         </div>
-                    
+
                         <div className="row mb-2">
                             {loader && <Loader />}
                         </div>
@@ -138,7 +140,7 @@ export default function GuestUpload(props) {
 
                                             src={base64String[index]} alt="Vehicle Tire" />
                                     </div>
-                                    <hr/>
+                                    <hr />
 
                                 </div>))}
 

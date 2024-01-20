@@ -18,7 +18,7 @@ const auth = async (req, res, next) => {
     catch (err) {
         console.log(err,"Unauthorised");
         // res.clearCookie('tollLogin');
-        res.status(401).send(err);
+        res.status(401).send("Session Expired, Please Login Again");
     }
 }
 module.exports = auth;

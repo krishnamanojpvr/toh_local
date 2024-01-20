@@ -106,8 +106,9 @@ export default function CheckRecords(props) {
         <form onSubmit={checkDate}>
           <label htmlFor='date'>Enter date</label>
           <input type='date' name='date' className='me-3' onChange={handleDateChange} max={dateS} required></input>
-          {!loader && <input type='submit' className='btn btn-primary' value='Check' />}
-          {!loader && <input type='button' className='btn btn-warning' onClick={goTo} value='Go Back' />}
+          {!loader && <input type='submit' className='btn btn-primary me-1' value='Check' />}
+          <input type='button' className='btn btn-warning ms-1' onClick={goTo} value='Go Back' />
+          
           {loader && <Loader/>}
         </form>
         <div id='p' className='mt-3 mb-3'></div>

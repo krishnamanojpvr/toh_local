@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Loader from './Loader.js';
 
 export default function TollLogin({ setSelectedToll, setSignInButton }) {
   setSignInButton(true);
   const [toll, setToll] = useState('');
   const [pwd, setPwd] = useState('');
   const [displayMessage, setDisplayMessage] = useState('');
-
+  const [loader, setLoader] = useState(false);
   useEffect(() => {
     return () => {
       if (displayMessage) {
@@ -42,14 +43,17 @@ export default function TollLogin({ setSelectedToll, setSignInButton }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     async function postData(formData) {
+      setLoader(true);
       try {
         const response = await axios.post(`http://${window.location.hostname}:4000/login`, formData, { withCredentials: true });
         console.log(response);
         if (response.data === "Success") {
           setSelectedToll(toll);
+          setLoader(false);
           navigate('/toll/start');
         }
         else {
+          setLoader(false);
           setDisplayMessage("Invalid Password");
         }
       }
@@ -77,44 +81,56 @@ export default function TollLogin({ setSelectedToll, setSignInButton }) {
   };
 
   return (
-    <div className='container ms-6'>
-      <h1 className='col-12 mt-5'>Login to Toll Plaza</h1>
-      <form className="col-12 col-md-6">
+    <div className='container ms-6 mt-5'>
+      <form className="col-12 col-md-5 shadow-lg rounded-4 border border-black p-4">
+        <div className='row '>
+          <h1 className='col'>Sign In to Toll Plaza</h1>
+        </div>
         <div className='row'>
-          <select className="form-select mt-3  w-50" aria-label="Default select example" autoComplete="off" onChange={handleTollChange} required>
-            <option value="" >Select Toll Plaza</option>
-            <option value="Hyderabad">Hyderabad</option>
-            <option value="Mumbai">Mumbai</option>
-            <option value="Delhi">Delhi</option>
-            <option value="Chennai">Chennai</option>
-            <option value="Kolkata">Kolkata</option>
-            <option value="Bangalore">Bangalore</option>
-            <option value="Pune">Pune</option>
-            <option value="Ahmedabad">Ahmedabad</option>
-            <option value="Jaipur">Jaipur</option>
-            <option value="Surat">Surat</option>
-          </select>
+          <div className="col-md-6">
+            <select className="form-select mt-3 w-100" id="Select" aria-label="label select example" autoComplete="off" onChange={handleTollChange} required>
+              <option selected >Select Toll Plaza</option>
+              <option value="Hyderabad">Hyderabad</option>
+              <option value="Mumbai">Mumbai</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Chennai">Chennai</option>
+              <option value="Kolkata">Kolkata</option>
+              <option value="Bangalore">Bangalore</option>
+              <option value="Pune">Pune</option>
+              <option value="Ahmedabad">Ahmedabad</option>
+              <option value="Jaipur">Jaipur</option>
+              <option value="Surat">Surat</option>
+            </select>
+          </div>
         </div>
-        <label className="mt-2" htmlFor="pwd" style={{ textAlign: "center" }}>
-          Password:
-        </label>
-        <br />
-        <div className='mt-2 mb-2'>
-          <input type="password" id="pwd" className="btn btn-secondary opacity-100" placeholder="Enter Password" required value={pwd} style={{ color: 'black', background: 'white' }} onChange={handlePwdChange} /><span>    <input type="checkbox" className="btn btn-primary" id='showPassword' onClick={togglePasswordVisibility} /> Show Password </span>
+        <div className="row mt-3 align-items-center">
+          <div className="col-md-6"> {/* Adjust the column size based on your layout */}
+            <input type="password" className="form-control" id="pwd" required value={pwd} placeholder="Password" onChange={handlePwdChange} />
+          </div>
+          <div className="col-md-6"> {/* Adjust the column size based on your layout */}
+            <label className="form-check-label d-flex mt-2 mt-md-0 ">
+              <input type="checkbox" id="showPassword" className="form-check-input"  onClick={togglePasswordVisibility} />  <span className="ms-2">Show Password</span>
+            </label>
+          </div>
         </div>
-        <div className="row">
-          {displayMessage && <p style={{ color: displayMessage.includes("Invalid") ? "red" : "blue" }}>{displayMessage}</p>}
+        <div className="row mt-3 align-items-center">
+          <div className="col-md-6"> {/* Adjust the column size based on your layout */}
+            {loader && <Loader />}
+          </div>
         </div>
-        <div className="input-group mt-1 row">
+        {displayMessage && <div className="row mt-2 mb-0">
+          <p style={{ color: displayMessage.includes("Invalid") ? "red" : "blue" }}>{displayMessage}</p>
+        </div>}
+        <div className="input-group mt-3 row">
           <div className="left col-sm-3">
             <Link to="/" >
-              <button type="button" className="btn btn-danger mt-1 ">
+              <button type="button" className="btn btn-warning mt-1 ">
                 Back
               </button>
             </Link>
           </div>
           <div className="right col-sm-3">
-            <input type="submit" value="Submit" className='btn  btn-success mt-1' onClick={handleSubmit} />
+            <input type="submit" value="Sign In" className='btn  btn-success mt-1' onClick={handleSubmit} />
           </div>
         </div>
       </form>

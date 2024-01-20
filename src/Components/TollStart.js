@@ -20,7 +20,7 @@ export default function TollStart(props) {
                     </Link>
                 </div>
                 <div className="mt-4">
-                    <button type="button" id="button3" className="btn btn-dark mx-2">
+                    <button type="button" id="button3" className="btn btn-dark  mx-2">
                         HOW TO
                     </button>
                     <button type="button" id="button4" className="btn btn-dark mx-2">
