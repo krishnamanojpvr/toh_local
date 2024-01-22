@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function TollStart(props) {
     props.setSignInButton(false);
+  console.log(document.cookie);
     return (
         <div className="container ">
             <div className="mt-5 d-flex flex-column justify-content-center align-items-center">
