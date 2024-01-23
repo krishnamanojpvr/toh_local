@@ -3,7 +3,7 @@ const router = express.Router();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const guestDetails = require('./routes/guestDetails.js');
-const guestUpload = require('./routes/guestUpload.js');
+const guestUpload = require('./routes/guestUpload.js'); 
 const tollCheckRecords = require('./routes/tollCheckRecords.js');
 const tollLogin = require('./routes/tollLogin.js');
 const tollLogout = require('./routes/tollLogout.js');
@@ -26,7 +26,7 @@ mongoose.connect("mongodb://localhost:27017/myFirst")
   .catch(err => console.error('Error connecting to MongoDB:', err));
 
 // ^ Express config for parsing request body as JSON
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));  
 app.use(router);
 
 router.get('/guestDet' ,guestDetails);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link,useNavigate } from 'react-router-dom';
+import NoAccess from './Components/NoAccess';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import TollStart from './Components/TollStart';
@@ -32,18 +32,13 @@ const NotFound = (props) => (
     The page you are looking for does not exist
   </h1>)
 
-const NoAccess = (props) =>(
-  // props.setSignInButton(true);
-    <div>
-    <h2>Access Denied, Please Sign In to continue</h2>
-    <Link to="/toll" type="button" className="btn btn-dark mx-2">Toll Sign In</Link>
-    </div>)
-
-
 function App() {
   const [selectedToll, setSelectedToll] = useState('');
   const [signInButton, setSignInButton] = useState(true);
-  const cookie = document.cookie;
+  const [cookie, setCookie] = useState(document.cookie);
+
+  // document.cookie = "tollLogin=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
 
   useEffect(() => {
     const storedToll = localStorage.getItem('selectedToll');
@@ -59,17 +54,17 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar signInButton={signInButton} />
+        <Navbar signInButton={signInButton} setCookie={setCookie} />
         <Routes>
-          <Route path='/' element={<Home setSignInButton={setSignInButton} />} />
+          <Route path='/' element={<Home setSignInButton={setSignInButton}  />} />
           <Route path='/loader' element={<Loader />} />
           <Route path='/aboutus' element={<AboutUs setSignInButton={setSignInButton} />} />
-          <Route path='/toll' element={<TollLogin selectedToll={selectedToll} setSelectedToll={setSelectedToll} setSignInButton={setSignInButton} />} />
+          <Route path='/toll' element={<TollLogin setCookie={setCookie} selectedToll={selectedToll} setSelectedToll={setSelectedToll} setSignInButton={setSignInButton}  />} />
           {!cookie &&
             (<>
-              <Route path='/toll/start' element={<NoAccess/>} />
-              <Route path='/toll/upload' element={<NoAccess/>} />
-              <Route path='/toll/checkrecords' element={<NoAccess/>} />
+              <Route path='/toll/start' element={<NoAccess />} />
+              <Route path='/toll/upload' element={<NoAccess />} />
+              <Route path='/toll/checkrecords' element={<NoAccess />} />
             </>
             )
           }
@@ -87,7 +82,7 @@ function App() {
           <Route path='/guest' element={<Guest setSignInButton={setSignInButton} />} />
           <Route path='/guest/upload' element={<GuestUpload setSignInButton={setSignInButton} />} />
           <Route path='/guest/checkdetails' element={<GuestDetails setSignInButton={setSignInButton} />} />
-          <Route path='*' element={<NotFound setSignInButton={setSignInButton} />} />
+          <Route path='*' element={<NotFound setSignInButton={setSignInButton}  />} />
         </Routes>
         {/* <Footer setSignInButton={setSignInButton}/> */}
       </Router>

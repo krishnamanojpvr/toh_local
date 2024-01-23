@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Loader from './Loader.js';
 
-export default function TollLogin({ setSelectedToll, setSignInButton }) {
+export default function TollLogin({ setSelectedToll, setSignInButton ,setCookie}) {
   setSignInButton(true);
   const [toll, setToll] = useState('');
   const [pwd, setPwd] = useState('');
@@ -16,7 +16,6 @@ export default function TollLogin({ setSelectedToll, setSignInButton }) {
       }
     };
   }, [displayMessage]);
-
 
   const handleTollChange = (event) => {
     setDisplayMessage('');
@@ -48,6 +47,7 @@ export default function TollLogin({ setSelectedToll, setSignInButton }) {
         const response = await axios.post(`http://${window.location.hostname}:4000/login`, formData, { withCredentials: true });
         console.log(response);
         if (response.data === "Success") {
+          setCookie(document.cookie);
           setSelectedToll(toll);
           setLoader(false);
           navigate('/toll/start');
@@ -82,7 +82,7 @@ export default function TollLogin({ setSelectedToll, setSignInButton }) {
 
   return (
     <div className='container ms-6 mt-5'>
-      <form className="col-12 col-md-5 shadow-lg rounded-4 border border-black p-4">
+      <form className="col-12 col-md-5 shadow-lg rounded-4 border border-black p-4" >
         <div className='row '>
           <h1 className='col'>Sign In to Toll Plaza</h1>
         </div>

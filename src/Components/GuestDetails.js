@@ -49,7 +49,7 @@ export default function GuestDetails(props) {
 
     return (
         <div className="parentgd">
-            <div className='GuestDetails container m-0 border border-black rounded-4 shadow p-4' >
+            <div className='GuestDetails container m-0 border border-black rounded-4 shadow p-4'>
             <div className='row'>
                 <form onSubmit={handleSubmit}>
                     <div className='col'>

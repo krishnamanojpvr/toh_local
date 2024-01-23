@@ -6,7 +6,7 @@ export default function Guest(props) {
     // const navigate = useNavigate();
     return (
         <div className="parentg">
-            <div className="Guest container shadow-lg rounded-3 m-0 border border-black">
+            <div className="Guest container shadow-lg rounded-3 m-0 border border-black" >
                 <div className="row">
                     <div className="col-sm-12 mt-4 text-center ">
                         <Link to="/guest/upload"><button type="button" className="btn btn-info Guestbt">Upload Your Tire Image Here</button></Link>
