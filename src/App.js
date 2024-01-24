@@ -12,6 +12,7 @@ import Navbar from './Components/Navbar';
 import AboutUs from './Components/AboutUs';
 import TollLogin from "./Components/TollLogin";
 // import Footer from './Components/Footer';
+import Statistics from './Components/Statistics';
 import './all_css/Home.css';
 import './all_css/TollLogin.css';
 import './all_css/TollStart.css';
@@ -27,7 +28,6 @@ import './street_cred-webfont.woff';
 import './street_cred-webfont.woff2';
 
 const NotFound = (props) => (
-  // props.setSignInButton(true);
   <h1>404 Error.
     The page you are looking for does not exist
   </h1>)
@@ -79,6 +79,7 @@ function App() {
           }
 
 
+          <Route path='/stats' element={<Statistics setSignInButton={setSignInButton}/>} />
           <Route path='/guest' element={<Guest setSignInButton={setSignInButton} />} />
           <Route path='/guest/upload' element={<GuestUpload setSignInButton={setSignInButton} />} />
           <Route path='/guest/checkdetails' element={<GuestDetails setSignInButton={setSignInButton} />} />

@@ -5,23 +5,18 @@ import Loader from './Loader.js';
 
 export default function GuestUpload(props) {
     props.setSignInButton(true);
-    // console.log(window.location.pathname);
-    // console.log(window.location.origin);
-    // console.log(window.location.href);
-    // console.log(window.location.host);
-    // console.log(window.location.hostname);
     const [im, setIm] = useState(null);
     const [classificationResult, setClassificationResult] = useState([]);
-    const [base64String, setBase64String] = useState([]); // Base64String
-    const [loader, setLoader] = useState(false); // Loader
-    const [res, setRes] = useState(false); // Result
+    const [base64String, setBase64String] = useState([]);
+    const [loader, setLoader] = useState(false); 
+    const [res, setRes] = useState(false); 
 
     const handleFileChange = (e) => {
         setClassificationResult([]);
-        setBase64String([]); // Base64String
+        setBase64String([]); 
         setIm([]);
-        setLoader(false); // Loader
-        setRes(false); // Result
+        setLoader(false); 
+        setRes(false); 
 
 
 
@@ -31,12 +26,9 @@ export default function GuestUpload(props) {
             setIm(s => [...s, selected]);
             function convertToBase64(selected) {
                 if (selected) {
-
-                    //! Converting image to base64String
                     const reader = new FileReader();
                     reader.onload = (e) => {
                         const base = e.target.result;
-                        // console.log(base); 
                         setBase64String(b => [...b, base]);
                     };
                     reader.readAsDataURL(selected);
@@ -54,13 +46,12 @@ export default function GuestUpload(props) {
 
     const handleUpload = (e) => {
         setClassificationResult([]);
-        setRes(false); // Result
-        e.preventDefault(); // Prevent the default form submission behavior     
-        setLoader(true); // Loader
+        setRes(false); 
+        e.preventDefault();     
+        setLoader(true); 
         if (im.length > 0) {
 
             const formData = new FormData();
-            // formData.append("GuestuploadImage", im);
             for (let i = 0; i < im.length; i++) {
                 console.log("Image No. ", i + 1);
                 console.log(im[i]);
@@ -70,7 +61,6 @@ export default function GuestUpload(props) {
 
             async function makeReq(formData) {
                 try {
-                    console.log("Making request");
                     const response = await axios.post(`http://${window.location.hostname}:4000/guestUp`, formData)
                     console.log(response.data);
                     setLoader(false);
@@ -78,7 +68,7 @@ export default function GuestUpload(props) {
                     setClassificationResult(response.data);
 
                 } catch (error) {
-                    console.log("Error occured in making request to server side from GuestUpload.js", error);
+                    console.log("Error occured in making request to server", error);
                     setLoader(null);
                     setRes(false);
                 }
@@ -95,37 +85,31 @@ export default function GuestUpload(props) {
     return (
 
         <div className="parentgu">
-            <div className="GuestUpload container m-0 shadow-lg rounded-4 border border-black">
+            <div className="GuestUpload container m-0 shadow-lg rounded-4 border border-black"style={{background:'white  '}}>
                 <form onSubmit={handleUpload} id='form' >
                     <div className="row text-center mb-3">
                         <h1>Upload Tire</h1>
                     </div>
                     <div className="image row">
                         <div className="col">
-                            <input onChange={handleFileChange} type="file" multiple accept="image/*" name="tyre" className="image form-control " required />
+                            <input style={{borderColor:'black'}} onChange={handleFileChange} type="file" multiple accept="image/*" name="tyre" className="image form-control " required />
                         </div>
                         <div className="row">
                             <div className="col mt-2 ">
-                                <Link to="/guest">
-                                    <button className="btn btn-warning imageSub" >Go Back</button>
+                                <Link to="/guest"
+                                    className="btn btn-warning imageSub" >Go Back
                                 </Link>
                             </div>
                             <div className="col mt-2">
                                 {res && <button className="btn btn-success mb-2 ms-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Result</button>}
                             </div>
                             <div className="col-sm-4">
-
-                                <button type='submit' className="btn btn-primary back mt-2 mb-2 col " >Submit</button>
-
+                                <button type='submit' className="btn btn-primary back mt-2 mb-2 col" >Submit</button>
                             </div>
                         </div>
-
                         <div className="row mb-2">
                             {loader && <Loader />}
                         </div>
-
-
-
                         <div className="offcanvas offcanvas-start" data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                             <div className="offcanvas-header">
                                 <h5 className="offcanvas-title" id="offcanvasWithBothOptionsLabel">Result</h5>

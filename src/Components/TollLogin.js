@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Loader from './Loader.js';
 
-export default function TollLogin({ setSelectedToll, setSignInButton ,setCookie}) {
+export default function TollLogin({ setSelectedToll, setSignInButton, setCookie }) {
   setSignInButton(true);
   const [toll, setToll] = useState('');
   const [pwd, setPwd] = useState('');
@@ -82,13 +82,13 @@ export default function TollLogin({ setSelectedToll, setSignInButton ,setCookie}
 
   return (
     <div className='container ms-6 mt-5'>
-      <form className="col-12 col-md-5 shadow-lg rounded-4 border border-black p-4" >
+      <form className="col-12 col-md-5 shadow-lg rounded-4 border border-black p-4" style={{ background: 'white  ' }} >
         <div className='row '>
           <h1 className='col'>Sign In to Toll Plaza</h1>
         </div>
         <div className='row'>
           <div className="col-md-6">
-            <select className="form-select mt-3 w-100" id="Select" aria-label="label select example" autoComplete="off" onChange={handleTollChange} required>
+            <select style={{ borderColor: 'black' }} className="form-select mt-3 w-100" id="Select" aria-label="label select example" autoComplete="off" onChange={handleTollChange} required>
               <option selected >Select Toll Plaza</option>
               <option value="Hyderabad">Hyderabad</option>
               <option value="Mumbai">Mumbai</option>
@@ -105,16 +105,16 @@ export default function TollLogin({ setSelectedToll, setSignInButton ,setCookie}
         </div>
         <div className="row mt-3 align-items-center">
           <div className="col-md-6"> {/* Adjust the column size based on your layout */}
-            <input type="password" className="form-control" id="pwd" required value={pwd} placeholder="Password" onChange={handlePwdChange} />
+            <input style={{ borderColor: 'black' }} type="password" className="form-control" id="pwd" required value={pwd} placeholder="Password" onChange={handlePwdChange} />
           </div>
           <div className="col-md-6"> {/* Adjust the column size based on your layout */}
             <label className="form-check-label d-flex mt-2 mt-md-0 ">
-              <input type="checkbox" id="showPassword" className="form-check-input"  onClick={togglePasswordVisibility} />  <span className="ms-2">Show Password</span>
+              <input style={{ borderColor: 'black' }} type="checkbox" id="showPassword" className="form-check-input" onClick={togglePasswordVisibility} />  <span className="ms-2">Show Password</span>
             </label>
           </div>
         </div>
         <div className="row mt-3 align-items-center">
-          <div className="col-md-6"> {/* Adjust the column size based on your layout */}
+          <div className="col-md-6">
             {loader && <Loader />}
           </div>
         </div>
@@ -123,10 +123,9 @@ export default function TollLogin({ setSelectedToll, setSignInButton ,setCookie}
         </div>}
         <div className="input-group mt-3 row">
           <div className="left col-sm-3">
-            <Link to="/" >
-              <button type="button" className="btn btn-warning mt-1 ">
-                Back
-              </button>
+            <Link to="/"
+              type="button" className="btn btn-warning mt-1 ">
+              Go Back
             </Link>
           </div>
           <div className="right col-sm-3">

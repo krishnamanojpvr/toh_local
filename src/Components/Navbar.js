@@ -9,14 +9,14 @@ export default function Navbar({ signInButton, setCookie }) {
     const response = await axios.get(`http://${window.location.hostname}:4000/logout`, { withCredentials: true })
     if (response.data) {
       setCookie(null)
-      navigate('/toll');
+      navigate('/');
     }
 
   }
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body fixed-top " data-bs-theme="dark">
       <div className="container-fluid">
-        <Link to="/"><button type='button' className="btn btn-light me-2" >HOME</button></Link>
+        <Link to="/" type='button' className="btn btn-light me-2" >HOME</Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -26,16 +26,13 @@ export default function Navbar({ signInButton, setCookie }) {
               <Link className="nav-link" to="/aboutus">AboutUs</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/faq">FAQ</Link>
-            </li>
-            <li className="nav-item">
               <Link className="nav-link" to="/stats">Statistics</Link>
             </li>
           </ul>
           {signInButton && (
-            <Link to="/toll"><button className="nav-item btn btn-light btn-outline-dark">Toll Sign In</button></Link>
+            <Link to="/toll" className="nav-item btn btn-light btn-outline-dark">Toll Sign In</Link>
           )}
-          {!signInButton && (<Link to="/toll"><button className="nav-item btn btn-danger">Sign Out</button></Link>
+          {!signInButton && (<button onClick={handleLogOut} className="nav-item btn btn-danger">Sign Out</button>
           )}
         </div>
       </div>

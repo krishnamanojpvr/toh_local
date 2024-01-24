@@ -1,4 +1,4 @@
-import React, { useState  } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Loader from './Loader';
@@ -6,12 +6,12 @@ import Loader from './Loader';
 export default function CheckRecords(props) {
   props.setSignInButton(false);
   const [dateSub, setDateSub] = useState([]);
-  const [tableData, setTableData] = useState([]);
   const [selectedImage, setSelectedImage] = useState([]);
   const [tireStatus, setTireStatus] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [records, setRecords] = useState(0);
-  const [loader, setLoader] = useState(false); // Loader
+  const [records, setRecords] = useState(null);
+  const [loader, setLoader] = useState(false);
+  const [resp, setResp] = useState([]);
   const navigate = useNavigate();
   const date = new Date();
   let m = date.getMonth() + 1;
@@ -34,25 +34,13 @@ export default function CheckRecords(props) {
         },
         withCredentials: true,
       });
-      let a = response.data;
+      setResp(response.data);
       setLoader(false);
 
-      const tableRows = a.map((item, index) => (
-        <tr key={index}>
-          <td>{item.vehicleNumber}</td>
-          <td>{item.userMobileNumber}</td>
-          {/* <td>{item.tyreStatus[0].class}</td> */}
-          {/* <td>{item.tyreStatus[0].confidence}</td> */}
-          <td><button className='btn btn-success' onClick={() => getImage(item.vehicleNumber)}>Image(s)</button></td>
-        </tr>
-      ));
-      setTableData(tableRows);
-      setRecords(a.length);
+      setRecords(response.data.length);
       console.log(records);
-      document.getElementById('p').innerHTML = "Total Records : " + a.length;
     } catch (err) {
       console.log(err);
-      // alert("No Data Found");
     }
   }
 
@@ -89,11 +77,6 @@ export default function CheckRecords(props) {
     }
   }
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setSelectedImage([]);
-  }
-
   const goTo = () => {
     navigate('/toll/start');
   }
@@ -103,59 +86,76 @@ export default function CheckRecords(props) {
       <h1>Check Records</h1>
       <div className='container text-center'>
         <div></div>
-        <form onSubmit={checkDate}>
+        <form onSubmit={checkDate} className='mb-4'>
           <label htmlFor='date'>Enter date</label>
           <input type='date' name='date' className='me-3' onChange={handleDateChange} max={dateS} required></input>
           {!loader && <input type='submit' className='btn btn-primary me-1' value='Check' />}
           <input type='button' className='btn btn-warning ms-1' onClick={goTo} value='Go Back' />
-          
-          {loader && <Loader/>}
+
+          {loader && <Loader />}
         </form>
-        <div id='p' className='mt-3 mb-3'></div>
+        {records &&
+        <div id='p' className='mt-3 mb-3'>
+           <p>Total Records : {records}</p>
+        </div>}
       </div>
 
       <div className=' table-responsive'>
-        <table className="table table-light table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">Vehicle Number</th>
-              <th scope="col">Mobile Number</th>
-              <th scope="col" style={{ width: 'auto' }}>Image</th>
-            </tr>
-          </thead>
-          <tbody>
-            {tableData}
-          </tbody>
-        </table>
+        {
+          resp &&
+          <table className="table table-light table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Vehicle Number</th>
+                <th scope="col">Mobile Number</th>
+                <th scope="col" style={{ width: 'auto' }}>Image</th>
+              </tr>
+            </thead>
+            <tbody>
+              {resp.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.vehicleNumber}</td>
+                  <td>{item.userMobileNumber}</td>
+                  <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal" onClick={() => getImage(item.vehicleNumber)}>
+                    Image(s)
+                  </button>
+                    {
+                      <div className="modal fade " id="Modal" tabindex="-1">
+                        <div className="modal-dialog modal-dialog-scrollable">
+                          <div className="modal-content">
+                            <div className="modal-header">
+                              <h1 className="modal-title fs-5" id="exampleModalLabel">Image Tire</h1>
+                              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body">
+                              {showModal &&
+                                tireStatus.map((item, index) => (<div className='row text-center mt-3 '>
+                                  <div id="getImg" >
+                                    <img className="enlarge" style={{ width: '200px', height: 'auto', borderRadius: '10px', transition: 'width 0.3s ease' }} // Shrink on mouse out
+                                      src={selectedImage[index]} alt="Vehicle Tire" />
+                                  </div>
+                                  <p >Classification : {item.class} </p>
+                                  <p >Confidence : {item.confidence} </p>
+                                </div>))}
+                              {
+                                !showModal &&
+                                <Loader />
+                              }
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    }
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        }
       </div>
-
-      {showModal && (
-        <div className="modal" style={{ display: 'flex', width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
-          <div className="modal-dialog" style={{ width: '100%', margin: 'auto' }}>
-            <div className="modal-content">
-              <div className="modal-header">
-                <button type="button" className="btn-close" onClick={handleCloseModal}></button>
-              </div>
-              <div className="modal-body">
-                {tireStatus.map((item, index) => (<div className='row text-center mb-4 mt-3'>
-                  <div id="getImg" >
-                    <img className="enlarge" style={{ width: '200px', height: 'auto', borderRadius: '10px', transition: 'width 0.3s ease' }} // Shrink on mouse out
-                      src={selectedImage[index]} alt="Vehicle Tire" />
-                  </div>
-                  <p >Classification : {item.class} </p>
-                  <p >Confidence : {item.confidence} </p>
-                  <hr />
-
-                </div>))}
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onClick={handleCloseModal} data-bs-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      )}
     </div>
   )
 }
