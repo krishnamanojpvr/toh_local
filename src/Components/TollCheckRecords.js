@@ -83,7 +83,7 @@ export default function CheckRecords(props) {
 
   return (
     <div>
-      <h1>Check Records</h1>
+      <h1 style={{color:'white'}}>Check Records</h1>
       <div className='container text-center'>
         <div></div>
         <form onSubmit={checkDate} className='mb-4'>

@@ -112,7 +112,7 @@ export default function TollUpload(props) {
   return (
     <div className="parenttu mt-0">
       <div className='TollUpload container m-0 mt-0'>
-        <form onSubmit={handleSubmit} style={{ maxWidth: '500px', width: '100%', backgroundColor: 'white' }} className='shadow-lg rounded-4 border border-black p-4' encType='multipart/form-data' id='TollUploadForm' >
+        <form onSubmit={handleSubmit} style={{ maxWidth: '500px', width: '100%', backgroundColor: 'white' }} className='shadow-lg rounded-4 border border-white p-4' encType='multipart/form-data' id='TollUploadForm' >
           <div id="TollUploadText">
             <h1>Upload the data</h1>
           </div>

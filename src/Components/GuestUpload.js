@@ -85,7 +85,7 @@ export default function GuestUpload(props) {
     return (
 
         <div className="parentgu">
-            <div className="GuestUpload container m-0 shadow-lg rounded-4 border border-black"style={{background:'white  '}}>
+            <div className="GuestUpload container m-0 shadow-lg rounded-4 border border-black p-4"style={{background:'white'}}>
                 <form onSubmit={handleUpload} id='form' >
                     <div className="row text-center mb-3">
                         <h1>Upload Tire</h1>

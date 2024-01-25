@@ -6,9 +6,9 @@ export default function Home(props){
     props.setSignInButton(true);
     return (
         <div className="parenth">
-            <div className="Home container m-0">
+            <div className="Home container m-0 border border-white"style={{color:'balck ',borderRadius:'10px',backgroundColor:'white'}}>
             <div id='title' className="row ">
-                <div className ="display-1 col text-center ">TIRES ON HIGHWAYS</div>                 
+                <div className ="display-1 col text-center"style={{color:'balck '}}>TIRES ON HIGHWAYS</div>                 
             </div>
             <div className="options row text-center">
                 <div className="option1 col-12 mt-2 mb-2">

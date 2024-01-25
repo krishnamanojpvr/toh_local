@@ -7,7 +7,7 @@ export default function TollStart(props) {
     return (
         
             <div className="container">
-                <div className="mt-5 d-flex container flex-column justify-content-center align-items-center shadow-lg border border-black p-4"style={{borderRadius:'10px', backgroundColor:'white'  }}>
+                <div className="mt-5 d-flex container flex-column justify-content-center align-items-center shadow-lg border border-white p-4"style={{borderRadius:'10px', backgroundColor:'white'  }}>
                 <h2 className="shadow-lg border border-black p-4 rounded-4 " >Toll Plaza: {props.selectedToll}</h2>
                 <div className="row mt-4 d-flex justify-content-center">
                     <div className="col-sm-5 m-1 d-flex justify-content-center">

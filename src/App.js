@@ -22,7 +22,7 @@ import './all_css/GuestDetails.css';
 import './all_css/GuestUpload.css';
 import './all_css/Loader.css';
 import Loader from './Components/Loader';
-import CheckRecords from './Components/CheckRecords';
+import CheckRecords from './Components/TollCheckRecords';
 import './stylesheet.css';
 import './street_cred-webfont.woff';
 import './street_cred-webfont.woff2';
