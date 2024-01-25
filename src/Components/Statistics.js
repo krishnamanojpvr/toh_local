@@ -31,8 +31,8 @@ export default function Statistics(props) {
   };
 
   return (
-    <div className='container'>
-      <Chart className='shadow-lg border border-black p-1' style={{borderRadius:'10px'}}
+    <div className='container shadow-lg border border-white p-4 rounded-4 bg-white'>
+      <Chart className=''
         chartType="PieChart"
         data={data}
         options={options}

@@ -8,15 +8,15 @@ export default function GuestUpload(props) {
     const [im, setIm] = useState(null);
     const [classificationResult, setClassificationResult] = useState([]);
     const [base64String, setBase64String] = useState([]);
-    const [loader, setLoader] = useState(false); 
-    const [res, setRes] = useState(false); 
+    const [loader, setLoader] = useState(false);
+    const [res, setRes] = useState(false);
 
     const handleFileChange = (e) => {
         setClassificationResult([]);
-        setBase64String([]); 
+        setBase64String([]);
         setIm([]);
-        setLoader(false); 
-        setRes(false); 
+        setLoader(false);
+        setRes(false);
 
 
 
@@ -46,9 +46,9 @@ export default function GuestUpload(props) {
 
     const handleUpload = (e) => {
         setClassificationResult([]);
-        setRes(false); 
-        e.preventDefault();     
-        setLoader(true); 
+        setRes(false);
+        e.preventDefault();
+        setLoader(true);
         if (im.length > 0) {
 
             const formData = new FormData();
@@ -84,27 +84,27 @@ export default function GuestUpload(props) {
 
     return (
 
-        <div className="parentgu">
-            <div className="GuestUpload container m-0 shadow-lg rounded-4 border border-black p-4"style={{background:'white'}}>
+        <div className="container d-flex justify-content-cenetr  mt-5">
+            <div className="GuestUpload container  rounded-4 p-3" style={{ backdropFilter: 'blur(5px)',maxWidth:'450px',maxHeight:'200px' }}>
                 <form onSubmit={handleUpload} id='form' >
                     <div className="row text-center mb-3">
-                        <h1>Upload Tire</h1>
+                        <h1 style={{ color: 'white' }}>Upload Tire</h1>
                     </div>
                     <div className="image row">
                         <div className="col">
-                            <input style={{borderColor:'black'}} onChange={handleFileChange} type="file" multiple accept="image/*" name="tyre" className="image form-control " required />
+                            <input style={{ borderColor: 'black' }} onChange={handleFileChange} type="file" multiple accept="image/*" name="tyre" className="image form-control " required />
                         </div>
                         <div className="row">
                             <div className="col mt-2 ">
                                 <Link to="/guest"
-                                    className="btn btn-warning imageSub" >Go Back
+                                    className="btn btn-warning" >Go Back
                                 </Link>
                             </div>
                             <div className="col mt-2">
                                 {res && <button className="btn btn-success mb-2 ms-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Result</button>}
                             </div>
-                            <div className="col-sm-4">
-                                <button type='submit' className="btn btn-primary back mt-2 mb-2 col" >Submit</button>
+                            <div className="col-sm-2">
+                                <button type='submit' className="btn btn-primary mt-2 mb-2">Submit</button>
                             </div>
                         </div>
                         <div className="row mb-2">

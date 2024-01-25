@@ -87,8 +87,8 @@ export default function CheckRecords(props) {
       <div className='container text-center'>
         <div></div>
         <form onSubmit={checkDate} className='mb-4'>
-          <label htmlFor='date'>Enter date</label>
-          <input type='date' name='date' className='me-3' onChange={handleDateChange} max={dateS} required></input>
+          <label htmlFor='date'style={{color:'white'}}>Enter date</label>
+          <input type='date' name='date' className='me-3 ms-3' onChange={handleDateChange} max={dateS} required></input>
           {!loader && <input type='submit' className='btn btn-primary me-1' value='Check' />}
           <input type='button' className='btn btn-warning ms-1' onClick={goTo} value='Go Back' />
 
@@ -96,7 +96,7 @@ export default function CheckRecords(props) {
         </form>
         {records &&
         <div id='p' className='mt-3 mb-3'>
-           <p>Total Records : {records}</p>
+           <p style={{color:'white'}}>Total Records : {records}</p>
         </div>}
       </div>
 

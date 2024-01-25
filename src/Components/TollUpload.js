@@ -110,8 +110,8 @@ export default function TollUpload(props) {
   }
 
   return (
-    <div className="parenttu mt-0">
-      <div className='TollUpload container m-0 mt-0'>
+    <div className=" mt-5  d-flex justify-content-center">
+      <div className='TollUpload container' style={{ maxWidth: '600px' }}>
         <form onSubmit={handleSubmit} style={{ maxWidth: '500px', width: '100%', backgroundColor: 'white' }} className='shadow-lg rounded-4 border border-white p-4' encType='multipart/form-data' id='TollUploadForm' >
           <div id="TollUploadText">
             <h1>Upload the data</h1>
@@ -122,7 +122,8 @@ export default function TollUpload(props) {
           </div>
           <div className="col-sm-7 mt-2">
             <label htmlFor="TollUserMobileNo" id="TollUserNo" className="form-label">User Mobile Number</label>
-            <input type="number" className="form-control " onChange={handleMNOChange} inputMode="numeric" id="TollUserMobileNo" required style={{ borderColor: 'black' }} />
+            <input type="number" className="form-control " style={{borderColor: 'black'
+            }} onChange={handleMNOChange} inputMode="numeric" id="TollUserMobileNo" required />
           </div>
           <div className="image col-sm-7 mt-2 mb-2">
             <label htmlFor="TollTireImage" id="TollUploadTire" className="form-label">Upload Tire(s) :</label>

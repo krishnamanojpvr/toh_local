@@ -81,14 +81,14 @@ export default function TollLogin({ setSelectedToll, setSignInButton, setCookie 
   };
 
   return (
-    <div className='container ms-6 mt-5'>
-      <form className="col-12 col-md-5 shadow-lg rounded-4 border border-black p-4" style={{ background: 'white  ' }} >
+    <div className='container ms-6 mt-5 d-flex justify-content-center'>
+      <form className="col-12 col-md-5 shadow-lg rounded-4 p-4" style={{ backdropFilter:'blur(4px)'}} >
         <div className='row '>
-          <h1 className='col'>Sign In to Toll Plaza</h1>
+          <h1 className='col' style={{color:'white'}}>Sign In to Toll Plaza</h1>
         </div>
         <div className='row'>
           <div className="col-md-6">
-            <select style={{ borderColor: 'black' }} className="form-select mt-3 w-100" id="Select" aria-label="label select example" autoComplete="off" onChange={handleTollChange} required>
+            <select  className="form-select border border-black mt-3 w-100" id="Select" aria-label="label select example" autoComplete="off" onChange={handleTollChange} required>
               <option selected >Select Toll Plaza</option>
               <option value="Hyderabad">Hyderabad</option>
               <option value="Mumbai">Mumbai</option>
@@ -105,11 +105,11 @@ export default function TollLogin({ setSelectedToll, setSignInButton, setCookie 
         </div>
         <div className="row mt-3 align-items-center">
           <div className="col-md-6"> {/* Adjust the column size based on your layout */}
-            <input style={{ borderColor: 'black' }} type="password" className="form-control" id="pwd" required value={pwd} placeholder="Password" onChange={handlePwdChange} />
+            <input style={{ borderColor: 'black',color:'black' }} type="password" className="form-control" id="pwd" required value={pwd} placeholder="Password" onChange={handlePwdChange} />
           </div>
           <div className="col-md-6"> {/* Adjust the column size based on your layout */}
             <label className="form-check-label d-flex mt-2 mt-md-0 ">
-              <input style={{ borderColor: 'black' }} type="checkbox" id="showPassword" className="form-check-input" onClick={togglePasswordVisibility} />  <span className="ms-2">Show Password</span>
+              <input type="checkbox" id="showPassword" className="form-check-input border border-black" onClick={togglePasswordVisibility} />  <span className="ms-2"style={{color:'white'}}>Show Password</span>
             </label>
           </div>
         </div>
