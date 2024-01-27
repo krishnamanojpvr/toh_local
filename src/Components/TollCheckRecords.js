@@ -83,27 +83,25 @@ export default function CheckRecords(props) {
 
   return (
     <div>
-      <h1 style={{color:'white'}}>Check Records</h1>
       <div className='container text-center'>
-        <div></div>
-        <form onSubmit={checkDate} className='mb-4'>
-          <label htmlFor='date'style={{color:'white'}}>Enter date</label>
-          <input type='date' name='date' className='me-3 ms-3' onChange={handleDateChange} max={dateS} required></input>
+      <h1 style={{color:'white',backdropFilter:'blur(8px)'}} className='mt-5' >Toll Check Records : {props.selectedToll}</h1>
+        <form onSubmit={checkDate} style={{backdropFilter:'blur(10px)'}} className='container mb-4 bg-black border border-white border-3 rounded-3 p-2   justify-content-center' >
+          <label htmlFor='date'className="mt-1 mb-2 container  align-items-center"style={{color:'white',}}>Enter date :</label>
+          <input type='date' name='date' className='me-3 ms-3 rounded-3 border border-3 border-white' onChange={handleDateChange} max={dateS} required></input>
           {!loader && <input type='submit' className='btn btn-primary me-1' value='Check' />}
-          <input type='button' className='btn btn-warning ms-1' onClick={goTo} value='Go Back' />
-
+          <input type='button' className='btn btn-warning ms-2' onClick={goTo} value='Go Back' />
           {loader && <Loader />}
-        </form>
-        {records &&
+        {records &&!loader &&
         <div id='p' className='mt-3 mb-3'>
            <p style={{color:'white'}}>Total Records : {records}</p>
         </div>}
+        </form>
       </div>
 
       <div className=' table-responsive'>
         {
           resp &&
-          <table className="table table-light table-bordered">
+          <table className="table table-light table-bordered border border-black border-5 container text-center">
             <thead>
               <tr>
                 <th scope="col">Vehicle Number</th>

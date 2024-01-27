@@ -85,7 +85,7 @@ export default function GuestUpload(props) {
     return (
 
         <div className="container d-flex justify-content-cenetr  mt-5">
-            <div className="GuestUpload container  rounded-4 p-3" style={{ backdropFilter: 'blur(5px)',maxWidth:'450px',maxHeight:'200px' }}>
+            <div className="GuestUpload container  rounded-4 p-3" style={{ backdropFilter: 'blur(15px)',maxWidth:'450px',maxHeight:'200px' }}>
                 <form onSubmit={handleUpload} id='form' >
                     <div className="row text-center mb-3">
                         <h1 style={{ color: 'white' }}>Upload Tire</h1>

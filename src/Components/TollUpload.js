@@ -112,21 +112,21 @@ export default function TollUpload(props) {
   return (
     <div className=" mt-5  d-flex justify-content-center">
       <div className='TollUpload container' style={{ maxWidth: '600px' }}>
-        <form onSubmit={handleSubmit} style={{ maxWidth: '500px', width: '100%', backgroundColor: 'white' }} className='shadow-lg rounded-4 border border-white p-4' encType='multipart/form-data' id='TollUploadForm' >
+        <form onSubmit={handleSubmit} style={{ maxWidth: '500px', width: '100%', backdropFilter:'blur(8px)' }} className='border border-white border-3 rounded-4 mt-5 p-4' encType='multipart/form-data' id='TollUploadForm' >
           <div id="TollUploadText">
-            <h1>Upload the data</h1>
+            <h1 style={{color:'white'}}>Upload the data</h1>
           </div>
           <div className="col-sm-7">
-            <label htmlFor="TollVehicleNumber" id="TollVehNo" className="form-label">VehicleNumber</label>
+            <label htmlFor="TollVehicleNumber" id="TollVehNo" style={{color:'white'}}className="form-label">VehicleNumber</label>
             <input type="text" className="form-control " onChange={handleVNOChange} id="TollVehicleNumber" required style={{ textTransform: 'uppercase', borderColor: 'black' }} />
           </div>
           <div className="col-sm-7 mt-2">
-            <label htmlFor="TollUserMobileNo" id="TollUserNo" className="form-label">User Mobile Number</label>
+            <label htmlFor="TollUserMobileNo" id="TollUserNo" style={{color:'white'}}className="form-label">User Mobile Number</label>
             <input type="number" className="form-control " style={{borderColor: 'black'
             }} onChange={handleMNOChange} inputMode="numeric" id="TollUserMobileNo" required />
           </div>
           <div className="image col-sm-7 mt-2 mb-2">
-            <label htmlFor="TollTireImage" id="TollUploadTire" className="form-label">Upload Tire(s) :</label>
+            <label htmlFor="TollTireImage" id="TollUploadTire" style={{color:'white'}}className="form-label">Upload Tire(s) :</label>
             <input type="file" accept='image/*' name="tyre" onChange={handleImageChange} style={{ borderColor: 'black' }} required id="TollTireImage" maxLength={8} className='form-control' multiple />
           </div>
           {loader && <Loader />}

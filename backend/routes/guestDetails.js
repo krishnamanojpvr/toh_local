@@ -14,6 +14,11 @@ router.get('/guestDet', async (req, res) => {
       const vehicleNumber = req.query.vehicleNumber;
 
       const tollData = await TollData.findOne({ vehicleNumber: vehicleNumber });
+      console.log(tollData);
+      if (!tollData) {
+        console.log("No Data Found");
+        return res.send("No Data Found");
+      }
       res.send(tollData);
     }
     catch (err) {

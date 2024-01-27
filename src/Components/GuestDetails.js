@@ -31,10 +31,12 @@ export default function GuestDetails(props) {
                 vehicleNumber: vno,
             },
         });
-        if (response.data === null) {
+        if (response.data === "No Data Found") {
             console.log("No Data Found");
             setRes(false);
             setLoader(false);
+            console.log(response.data)
+            alert("No Data Found");
         }
         else {
 
@@ -56,8 +58,8 @@ export default function GuestDetails(props) {
 
     return (
         <div className="parentgd container d-flex justify-content-center mt-5">
-            <div className='GuestDetails container  rounded-4 ' style={{
-                backdropFilter: 'blur(3px)', minHeight: 'auto',
+            <div className='GuestDetails container  rounded-4 p-4' style={{
+                backdropFilter: 'blur(13px)', minHeight: 'auto',
                 maxWidth: '600px',
             }}>
                 <div className='row'>
@@ -74,7 +76,7 @@ export default function GuestDetails(props) {
                             </div>
                             {res && <div className="col-sm-3 mt-2">
                                 <button type="button" className="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Result</button>
-                                </div>}
+                            </div>}
                             <div className="col-sm-3 mt-2">
                                 <button type="submit" className="btn btn-primary detSub">Submit</button>
                             </div>
@@ -100,8 +102,8 @@ export default function GuestDetails(props) {
                                     <br />
                                     <hr />
                                 </div>))}
-
                             </div>
+                            
                         </div>
 
                     </form>
