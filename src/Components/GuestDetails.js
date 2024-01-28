@@ -7,7 +7,7 @@ export default function GuestDetails(props) {
     props.setSignInButton(true);
     const statusArray = [];
     const base64Array = [];
-
+    const [NoData, setNoData] = useState(false);
     const [vno, setVNo] = useState('');
     const [phoneNo, setPhoneNo] = useState('');
     const [tollPlaza, setTollPlaza] = useState('');
@@ -20,10 +20,12 @@ export default function GuestDetails(props) {
         setPhoneNo('');
         setRes(false);
         setLoader(false);
+        setNoData(false);
     }
 
     const handleSubmit = async (e) => {
         setLoader(true);
+        setNoData(false);
         setRes(false);
         e.preventDefault();
         const response = await axios.get(`http://${window.location.hostname}:4000/guestDet`, {
@@ -36,7 +38,7 @@ export default function GuestDetails(props) {
             setRes(false);
             setLoader(false);
             console.log(response.data)
-            alert("No Data Found");
+            setNoData(response.data);
         }
         else {
 
@@ -51,6 +53,7 @@ export default function GuestDetails(props) {
                 base64Array.push(response.data.userTyre64[i]);
                 base64Array[i] = "data:image/jpeg;base64," + base64Array[i];
             }
+
             setLoader(false)
             setRes(true);
         }
@@ -58,10 +61,7 @@ export default function GuestDetails(props) {
 
     return (
         <div className="parentgd container d-flex justify-content-center mt-5">
-            <div className='GuestDetails container  rounded-4 p-4' style={{
-                backdropFilter: 'blur(13px)', minHeight: 'auto',
-                maxWidth: '600px',
-            }}>
+            <div className='GuestDetails container  rounded-4 p-4 bg-black  border border-3 border-white' style={{ maxWidth: "600px" }} >
                 <div className='row'>
                     <form onSubmit={handleSubmit}>
                         <div className='col'>
@@ -75,35 +75,42 @@ export default function GuestDetails(props) {
                                 <Link to="/guest" className="btn btn-warning back" id="blackbut">Go Back</Link>
                             </div>
                             {res && <div className="col-sm-3 mt-2">
-                                <button type="button" className="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Result</button>
+                                <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#backdrop" >Result</button>
+                            </div>}
+                            {NoData && <div className="col-sm-3 mt-2 me-1">
+                                <p class="btn btn-danger">NotFound</p>
                             </div>}
                             <div className="col-sm-3 mt-2">
                                 <button type="submit" className="btn btn-primary detSub">Submit</button>
                             </div>
                         </div>
                         {loader && <Loader />}
-                        <div className="offcanvas offcanvas-start" data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-                            <div className="offcanvas-header">
-                                <h5 className="offcanvas-title" id="offcanvasWithBothOptionsLabel">Result</h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                            </div>
-                            <div className="offcanvas-body">
-                                {res && statusArray.map((item, index) => (<div className='row text-center mb-4 mt-3'>
-                                    <p >Vehicle Number: {vno} </p>
-                                    <p >Mobile Number: {phoneNo} </p>
-                                    <p >Vehicle Number: {tollPlaza} </p>
-                                    <p >Vehicle Number: {date} </p>
-                                    <p >Classification : {item.class} </p>
-                                    <p >Confidence : {item.confidence} </p>
-                                    <div id="getImg" >
-                                        <img className="enlarge" style={{ width: '200px', height: 'auto', borderRadius: '10px', transition: 'width 0.3s ease' }} // Shrink on mouse out
-                                            src={base64Array[index]} alt="Vehicle Tire" />
+                        <div className="modal fade" id="backdrop" tabIndex="-1" aria-labelledby="backdropLabel" aria-hidden="true">
+                            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h5 className="modal-title" id="backdropLabel">Result</h5>
+                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <br />
-                                    <hr />
-                                </div>))}
+                                    <div className="modal-body">
+                                        {res && statusArray.map((item, index) => (
+                                            <div className='row text-center mb-4 mt-3'>
+                                                <p >Vehicle Number: {vno} </p>
+                                                <p >Mobile Number: {phoneNo} </p>
+                                                <p >Vehicle Number: {tollPlaza} </p>
+                                                <p >Vehicle Number: {date} </p>
+                                                <p >Classification : {item.class} </p>
+                                                <p >Confidence : {item.confidence} </p>
+                                                <div id="getImg" >
+                                                    <img className="enlarge" style={{ width: '200px', height: 'auto', borderRadius: '10px', transition: 'width 0.3s ease' }} // Shrink on mouse out
+                                                        src={base64Array[index]} alt="Vehicle Tire" />
+                                                </div>
+                                                <hr />
+                                                <br />
+                                            </div>))}
+                                    </div>
+                                </div>
                             </div>
-                            
                         </div>
 
                     </form>

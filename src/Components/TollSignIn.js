@@ -82,7 +82,7 @@ export default function TollLogin({ setSelectedToll, setSignInButton, setCookie 
 
   return (
     <div className='container ms-6 mt-5 d-flex justify-content-center'>
-      <form className="col-12 col-md-5 shadow-lg rounded-4 p-4" style={{ backdropFilter:'blur(4px)'}} >
+      <form className="col-12 col-md-5 shadow-lg rounded-4 p-4 border border-white border-3 bg-black" >
         <div className='row '>
           <h1 className='col' style={{color:'white'}}>Sign In to Toll Plaza</h1>
         </div>
@@ -105,7 +105,7 @@ export default function TollLogin({ setSelectedToll, setSignInButton, setCookie 
         </div>
         <div className="row mt-3 align-items-center">
           <div className="col-md-6"> {/* Adjust the column size based on your layout */}
-            <input style={{ borderColor: 'black',color:'black' }} type="password" className="form-control" id="pwd" required value={pwd} placeholder="Password" onChange={handlePwdChange} />
+            <input style={{color:'black' }} type="password" className="form-control border border-black" id="pwd" required value={pwd} placeholder="Password" onChange={handlePwdChange} />
           </div>
           <div className="col-md-6"> {/* Adjust the column size based on your layout */}
             <label className="form-check-label d-flex mt-2 mt-md-0 ">

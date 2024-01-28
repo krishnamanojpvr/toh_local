@@ -110,9 +110,9 @@ export default function TollUpload(props) {
   }
 
   return (
-    <div className=" mt-5  d-flex justify-content-center">
+    <div className=" mt-3  d-flex justify-content-center">
       <div className='TollUpload container' style={{ maxWidth: '600px' }}>
-        <form onSubmit={handleSubmit} style={{ maxWidth: '500px', width: '100%', backdropFilter:'blur(8px)' }} className='border border-white border-3 rounded-4 mt-5 p-4' encType='multipart/form-data' id='TollUploadForm' >
+        <form onSubmit={handleSubmit} style={{ maxWidth: '500px', width: '100%'}} className='border border-white border-3 bg-black rounded-4 mt-5 p-4' encType='multipart/form-data' id='TollUploadForm' >
           <div id="TollUploadText">
             <h1 style={{color:'white'}}>Upload the data</h1>
           </div>
@@ -130,17 +130,18 @@ export default function TollUpload(props) {
             <input type="file" accept='image/*' name="tyre" onChange={handleImageChange} style={{ borderColor: 'black' }} required id="TollTireImage" maxLength={8} className='form-control' multiple />
           </div>
           {loader && <Loader />}
-          {uploadStatus && (
-            <div id='TollUploadResult'>
-              <p style={{ color: uploadStatus.includes("Not") ? "red" : "green" }}>{uploadStatus}</p>
-            </div>
-          )}
+          
           <div className="col-12 mt-2 mb-2">
-            <button type="submit" id="TollSubmit" className="btn btn-success">Submit</button>
+            <button type="submit" id="TollSubmit" className="btn btn-primary">Submit</button>
           </div>
           <div className="col-12 mt-2">
             <Link to="/toll/start" type='button' id='TollBack' className="btn btn-warning">Go Back</Link>
           </div>
+          {uploadStatus && (
+            <div className="col-12 mt-2 mb-2">
+            {uploadStatus === 'Uploaded Successfully'? <button type="button" className="btn btn-success">{uploadStatus}</button> : <button type="button" className="btn btn-danger">{uploadStatus}</button>}
+          </div>
+          )}
         </form>
       </div>
     </div>

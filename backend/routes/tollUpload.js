@@ -30,7 +30,6 @@ router.post('/tollupload',auth,Tollupload.any(), async (req, res) => {
     for (let i = 0; i < files.length; i++) {
         b64Array.push(files[i].buffer.toString('base64'));
     }
-    console.log(b64Array[0]);
     for (let i = 0; i < files.length; i++) {
         const tollImageBuffer = files[i].buffer;
         const tollBlob = blobUtil.createBlob([tollImageBuffer], { type: 'image/jpeg/jpg/png' });

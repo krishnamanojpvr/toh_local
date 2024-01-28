@@ -12,7 +12,6 @@ router.get('/guestDet', async (req, res) => {
     console.log("GuestDetails Route");
     try {
       const vehicleNumber = req.query.vehicleNumber;
-
       const tollData = await TollData.findOne({ vehicleNumber: vehicleNumber });
       console.log(tollData);
       if (!tollData) {

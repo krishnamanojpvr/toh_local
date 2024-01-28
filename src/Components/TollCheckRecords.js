@@ -23,6 +23,7 @@ export default function CheckRecords(props) {
   const dateS = date.getFullYear() + '-' + m + '-' + String(d);
 
   async function checkDate(e) {
+    setRecords(null)
     setLoader(true);
     e.preventDefault();
     console.log(props.selectedToll)
@@ -37,7 +38,7 @@ export default function CheckRecords(props) {
       setResp(response.data);
       setLoader(false);
 
-      setRecords(response.data.length);
+      setRecords(`${response.data.length}`);
       console.log(records);
     } catch (err) {
       console.log(err);
@@ -91,10 +92,12 @@ export default function CheckRecords(props) {
           {!loader && <input type='submit' className='btn btn-primary me-1' value='Check' />}
           <input type='button' className='btn btn-warning ms-2' onClick={goTo} value='Go Back' />
           {loader && <Loader />}
-        {records &&!loader &&
+        {records && !loader &&
         <div id='p' className='mt-3 mb-3'>
-           <p style={{color:'white'}}>Total Records : {records}</p>
-        </div>}
+
+          {records==='0'? <button type='button' className='btn btn-danger'>No Records</button>:<button type='button' className='btn btn-success'>Total Records : {records}</button>}
+        </div>
+        }
         </form>
       </div>
 
@@ -134,6 +137,8 @@ export default function CheckRecords(props) {
                                   </div>
                                   <p >Classification : {item.class} </p>
                                   <p >Confidence : {item.confidence} </p>
+                                  <hr/>
+                                  <br/>
                                 </div>))}
                               {
                                 !showModal &&
