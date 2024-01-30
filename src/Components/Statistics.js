@@ -31,7 +31,8 @@ export default function Statistics(props) {
   };
 
   return (
-    <div className='container shadow-lg border border-white p-4 rounded-4 bg-white'>
+    <div className='parenth mt-5'>
+    <div className='container shadow-lg border border-white border-3 p-4 rounded-4 bg-black'>
       <Chart className=''
         chartType="PieChart"
         data={data}
@@ -39,6 +40,7 @@ export default function Statistics(props) {
         width={"100%"}
         height={"400px"}
       />
+    </div>
     </div>
   );
 }

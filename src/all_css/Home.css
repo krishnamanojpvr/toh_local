@@ -2,7 +2,7 @@
 
 body {
   
-  background-image: url("t.jpg");
+  background-image: url("tire.jpg");
   /* Escape the backslash */
   /* background: fixed; */
   /* display: flex; */
@@ -17,9 +17,7 @@ body {
 }
 
 .parenth {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(10, 1fr);
+  height: 100vh;
 }
 
 .Home {

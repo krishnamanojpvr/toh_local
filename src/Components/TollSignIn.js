@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Loader from './Loader.js';
+// import ReCAPTCHA from 'react-google-recaptcha';
 
 export default function TollLogin({ setSelectedToll, setSignInButton, setCookie }) {
   setSignInButton(true);
@@ -9,6 +10,7 @@ export default function TollLogin({ setSelectedToll, setSignInButton, setCookie 
   const [pwd, setPwd] = useState('');
   const [displayMessage, setDisplayMessage] = useState('');
   const [loader, setLoader] = useState(false);
+  // const [captcha, setCaptcha] = useState(false);
   useEffect(() => {
     return () => {
       if (displayMessage) {
@@ -16,7 +18,7 @@ export default function TollLogin({ setSelectedToll, setSignInButton, setCookie 
       }
     };
   }, [displayMessage]);
-
+  // const verifyCaptcha = (value) => {setCaptcha(true); };
   const handleTollChange = (event) => {
     setDisplayMessage('');
     setToll(event.target.value);
@@ -70,6 +72,9 @@ export default function TollLogin({ setSelectedToll, setSignInButton, setCookie 
     else if (!pwd) {
       setDisplayMessage("Please enter password");
     }
+    // else if (!captcha) {
+    //   setDisplayMessage("Please verify captcha");
+    // }
     else {
       const formData = new FormData();
       formData.append('toll', toll);
@@ -81,14 +86,15 @@ export default function TollLogin({ setSelectedToll, setSignInButton, setCookie 
   };
 
   return (
+    <div className='parenth'>
     <div className='container ms-6 mt-5 d-flex justify-content-center'>
       <form className="col-12 col-md-5 shadow-lg rounded-4 p-4 border border-white border-3 bg-black" >
         <div className='row '>
-          <h1 className='col' style={{color:'white'}}>Sign In to Toll Plaza</h1>
+          <h1 className='col' style={{ color: 'white' }}>Sign In to Toll Plaza</h1>
         </div>
         <div className='row'>
           <div className="col-md-6">
-            <select  className="form-select border border-black mt-3 w-100" id="Select" aria-label="label select example" autoComplete="off" onChange={handleTollChange} required>
+            <select className="form-select border border-black mt-3 w-100" id="Select" aria-label="label select example" autoComplete="off" onChange={handleTollChange} required>
               <option selected >Select Toll Plaza</option>
               <option value="Hyderabad">Hyderabad</option>
               <option value="Mumbai">Mumbai</option>
@@ -105,27 +111,30 @@ export default function TollLogin({ setSelectedToll, setSignInButton, setCookie 
         </div>
         <div className="row mt-3 align-items-center">
           <div className="col-md-6"> {/* Adjust the column size based on your layout */}
-            <input style={{color:'black' }} type="password" className="form-control border border-black" id="pwd" required value={pwd} placeholder="Password" onChange={handlePwdChange} />
+            <input style={{ color: 'black' }} type="password" className="form-control border border-black" id="pwd" required value={pwd} placeholder="Password" onChange={handlePwdChange} />
           </div>
           <div className="col-md-6"> {/* Adjust the column size based on your layout */}
             <label className="form-check-label d-flex mt-2 mt-md-0 ">
-              <input type="checkbox" id="showPassword" className="form-check-input border border-black" onClick={togglePasswordVisibility} />  <span className="ms-2"style={{color:'white'}}>Show Password</span>
+              <input type="checkbox" id="showPassword" className="form-check-input border border-black" onClick={togglePasswordVisibility} />  <span className="ms-2" style={{ color: 'white' }}>Show Password</span>
             </label>
           </div>
         </div>
         <div className="row mt-3 align-items-center">
+          {/* <div className='col-md-6'>
+            <ReCAPTCHA sitekey="6Lf2FFwpAAAAAJSxFaOazGkU-7voL7EIw2mXtWRT" onChange={verifyCaptcha} />
+          </div> */}
           <div className="col-md-6">
             {loader && <Loader />}
           </div>
         </div>
         {displayMessage && <div className="row mt-2 mb-0">
-          <p style={{ color: displayMessage.includes("Invalid") ? "red" : "blue" }}>{displayMessage}</p>
+          <p style={{ color: displayMessage.includes("Invalid") ? "red" : "yellow" }}>{displayMessage}</p>
         </div>}
         <div className="input-group mt-3 row">
           <div className="left col-sm-3">
             <Link to="/"
               type="button" className="btn btn-warning mt-1 ">
-              Go Back
+              GoBack
             </Link>
           </div>
           <div className="right col-sm-3">
@@ -133,6 +142,7 @@ export default function TollLogin({ setSelectedToll, setSignInButton, setCookie 
           </div>
         </div>
       </form>
+    </div>
     </div>
   );
 }

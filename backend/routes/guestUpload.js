@@ -37,6 +37,7 @@ router.post('/guestUp', Guestupload.any(), async (req, res) => {
         return res.send(guestFlaskResponse);
       }
       catch (error) {
+        console.log(error);
         return res.status(500).send('Error sending file to flask_api');
       }
     } catch (err) {
