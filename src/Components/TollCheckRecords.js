@@ -86,7 +86,7 @@ export default function CheckRecords(props) {
     <div className='parenth'>
       <div className='container text-center'>
       <h1 style={{color:'white',backdropFilter:'blur(8px)'}} className='mt-5 bg-black border border-white border-3 rounded-5 p-4' >Toll Check Records : {props.selectedToll}</h1>
-        <form onSubmit={checkDate} style={{backdropFilter:'blur(10px)'}} className='container mb-4 bg-black border border-white border-3 rounded-3 p-2   justify-content-center' >
+        <form onSubmit={checkDate} style={{backdropFilter:'blur(10px)'}} className='container mb-4 bg-black border border-white border-3 rounded-5 p-2   justify-content-center' >
           <label htmlFor='date'className="mt-1 mb-2 container  align-items-center"style={{color:'white',}}>Enter date :</label>
           <input type='date' name='date' className='me-3 ms-3 rounded-3 border border-3 border-white' onChange={handleDateChange} max={dateS} required></input>
           {!loader && <input type='submit' className='btn btn-primary me-1' value='Check' />}

@@ -9,7 +9,7 @@ export default function AboutUs(props) {
       <h1  className="display-4 bg-black border border-white border-3 p-2 rounded-4 text-center "style={{color:'white'}}>Hellooo , Meet The Team G81 !!!</h1>
       <div className="row row-cols-1 row-cols-md-3">
         <div className="col mb-4">
-          <div className="card bg-black text-center"style={{color:'white'}}>
+          <div className="card bg-black  text-center"style={{color:'white'}}>
             <img src={require('../images/Varun.jpg')} className="card-img-top" alt="Varun" />
             <div className="card-body">
               <h5 className="card-title">Varun</h5>

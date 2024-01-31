@@ -10,22 +10,22 @@ export default function TollStart(props) {
                 <h2 className="shadow-lg border border-white border-3 p-4 rounded-4 text-center " style={{color:'white',background:'black'}} >Toll Plaza: {props.selectedToll}</h2>
                 <div className="row mt-4 d-flex  justify-content-center">
                     <div className="col-sm-5 m-1 d-flex justify-content-center">
-                    <Link to="/toll/upload" type="button" className="btn btn-dark bg-black  d-flex w-75 justify-content-center">
+                    <Link to="/toll/upload" type="button" className="btn btn-light  d-flex w-75 justify-content-center">
                             UPLOAD DATA
                     </Link>
                     </div>
 
                     <div className="col-sm-6 m-1 d-flex justify-content-center">
-                    <Link to="/toll/checkrecords" type="button" className="btn btn-dark bg-black d-flex w-75 justify-content-center">
+                    <Link to="/toll/checkrecords" type="button" className="btn btn-light d-flex w-75 justify-content-center">
                             CHECK RECORDS
                     </Link>
                     </div>
                     <div className="col-sm-5 m-1 d-flex justify-content-center">
-                        <Link type="button"id="button3" className="btn btn-dark bg-black  d-flex w-75 justify-content-center">
+                        <Link type="button"id="button3" className="btn btn-light  d-flex w-75 justify-content-center">
                         HOW TO
                     </Link></div>
                     <div className="col-sm-6 m-1 d-flex justify-content-center">
-                    <Link type="button"id="button4" className="btn btn-dark bg-black d-flex w-75 justify-content-center">
+                    <Link type="button"id="button4" className="btn btn-light d-flex w-75 justify-content-center">
                         HELP
                     </Link>
                     </div>
