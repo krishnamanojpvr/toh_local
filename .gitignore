@@ -23,4 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 /backend/node_modules
-# best_model.h5
+/backend/server.env
+# /backend/best_model.h5

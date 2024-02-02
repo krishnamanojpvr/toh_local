@@ -9,7 +9,7 @@ const blobUtil = require('blob-util');
 const cookieparser = require('cookie-parser')
 router.use(cookieparser());
 const twilio = require('twilio');
-
+const dotenv = require('dotenv');
 // ^ CORS 
 router.use(cors({
     origin: 'http://localhost:3000',
@@ -81,21 +81,23 @@ router.post('/tollupload',auth,Tollupload.any(), async (req, res) => {
         console.error("Error sending file to flask_api :", error);
         res.status(500).send('Error sending file to flask_api');
     }
-    // try {
-    //     const accountSid = 'AC47aad9efb59c476057c03e1e8b2ebace';
-    //     const authToken = 'a8ff2103eb0f7ad7b4322374a1ea126e';
-    //     const client = twilio(accountSid, authToken);
-    //     client.messages
-    //         .create({
-    //             from: '+13344543086',
-    //             to: '+91' + userMobileNumber,
-    //             body: `Your vehicle  ${vehicleNumber} has crossed ${tollPlaza} on ${date} \n ${msg}`,
-    //         })
-    //         .then(message => console.log(message.sid))
-    //         .done();
-    // } catch (err) {
-    //     console.log('SMS NOT SENT');
-    // }
+    // sms(vehicleNumber,tollPlaza,date,msg);
+    
+        const accountSid =  `${process.env.TWILIO_ACCOUNT}`;
+        const authToken = `${process.env.AUTH_TOKEN}`;
+        const client = twilio(accountSid, authToken);
+        try {
+        const responseSMS = await client.messages
+            .create({
+                from: '+13344543086',
+                to: '+91' + userMobileNumber,
+                body: `Your vehicle  ${vehicleNumber} has crossed ${tollPlaza} on ${date}\n${msg}`,
+            })
+        console.log(responseSMS.sid);
+            
+    } catch (err) {
+        console.log('SMS NOT SENT');
+    }
     return;
 });
 

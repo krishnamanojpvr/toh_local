@@ -3,17 +3,15 @@ from tensorflow import keras
 from tensorflow.keras.preprocessing import image
 import numpy as np
 from flask_cors import CORS
-import time
-import os
-
+from io import BytesIO
+from PIL import Image
 
 app = Flask(__name__)
 CORS(app)
 model = keras.models.load_model('best_model.h5')
 
-def preprocess_image(image_path):
-    img = image.load_img(image_path, target_size=(64, 64))
-    img = image.img_to_array(img)
+def preprocess_image(file):
+    img = image.img_to_array(Image.open(file).convert('RGB').resize((64, 64)))
     img = np.expand_dims(img, axis=0)
     img = img / 255.0 
     return img
@@ -21,18 +19,20 @@ def preprocess_image(image_path):
 @app.route('/classify', methods=['POST'])
 def classify_image():
     try:
+        print("1234567890")
         setofresult = []
         files = request.files.getlist('image')
+        print("09874321")
+        print(type(files))
+        print(files)
         if not files:
             return jsonify({"error": "No files uploaded"})
-
-
-        for num, file in enumerate(files):
-            image_path = f'temp_image_{num}.jpg'
-            file.save(image_path)
-            processed_image = preprocess_image(image_path)
+        for file in files:
+            processed_image = preprocess_image(file)
             predictions = model.predict(processed_image)
+            print(predictions)
             predicted_class = np.argmax(predictions)
+            print(predicted_class)
             class_labels = ["Cracked", "Normal"] 
 
             result = {
@@ -41,13 +41,16 @@ def classify_image():
             }
 
             setofresult.append(result)
-            os.remove(image_path)
-
 
         return jsonify(setofresult)
 
     except Exception as e:
-        return jsonify({"error": str(e)})
+        print(f"Error: {e}")
+        return jsonify({"error": str(e)}),500
+
+@app.route('/', methods=['GET'])
+def health_check():
+    return "Hello TiresOnHighways Flask User!!!"
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0" , debug=True, port=5000)
+    app.run(debug=True)
