@@ -24,4 +24,4 @@ yarn-error.log*
 
 /backend/node_modules
 /backend/server.env
-# /backend/best_model.h5
+/backend/best_model.h5
