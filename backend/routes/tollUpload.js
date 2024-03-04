@@ -83,9 +83,8 @@ router.post('/tollupload', auth, Tollupload.any(), async (req, res) => {
         console.error("Error sending file to flask_api :", error);
         res.status(500).send('Error sending file to flask_api');
     }
-    // sms(vehicleNumber,tollPlaza,date,msg);
-    const accountSid = 'ACb8b6c30dd25894aec455697c9eab395c';
-    const authToken = '37d91e8694b6c522711da47a78abfb6f';
+    // const accountSid = 'ACb8b6c30dd25894aec455697c9eab395c';
+    // const authToken = '37d91e8694b6c522711da47a78abfb6f';
     const client = twilio(accountSid, authToken);
     try {
         const responseSMS = await client.messages
