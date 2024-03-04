@@ -9,7 +9,8 @@ const blobUtil = require('blob-util');
 const cookieparser = require('cookie-parser')
 router.use(cookieparser());
 const twilio = require('twilio');
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv');
+// dotenv.config();
 // ^ CORS 
 router.use(cors({
     origin: 'http://localhost:3000',
@@ -21,11 +22,12 @@ const TollUp = multer.memoryStorage();
 const Tollupload = multer({ storage: TollUp, limits: { fieldSize: 25 * 1024 * 1024 } })
 
 
+
 //! TollUpload Route
-router.post('/tollupload',auth,Tollupload.any(), async (req, res) => {
+router.post('/tollupload', auth, Tollupload.any(), async (req, res) => {
     console.log("TollUpload Route");
 
-    let msg ='';
+    let msg = '';
     const { vehicleNumber, userMobileNumber, date, tollPlaza } = req.body;
     const tollBlobArray = [];
     const files = req.files;
@@ -63,11 +65,11 @@ router.post('/tollupload',auth,Tollupload.any(), async (req, res) => {
                 tollPlaza: tollPlaza,
             });
 
-            for(let i=0;i<tollFlaskResponse.length;i++){
-                msg = msg + `Tire${i+1} is ${tollFlaskResponse[i].class}\n`;
+            for (let i = 0; i < tollFlaskResponse.length; i++) {
+                msg = msg + `Tire${i + 1} is ${tollFlaskResponse[i].class}\n`;
             }
             console.log(msg);
-           
+
 
             await tollData.save();
             console.log('Data saved to MongoDB');
@@ -82,20 +84,20 @@ router.post('/tollupload',auth,Tollupload.any(), async (req, res) => {
         res.status(500).send('Error sending file to flask_api');
     }
     // sms(vehicleNumber,tollPlaza,date,msg);
-    
-        const accountSid =  `${process.env.TWILIO_ACCOUNT}`;
-        const authToken = `${process.env.AUTH_TOKEN}`;
-        const client = twilio(accountSid, authToken);
-        try {
+    const accountSid = 'ACb8b6c30dd25894aec455697c9eab395c';
+    const authToken = '37d91e8694b6c522711da47a78abfb6f';
+    const client = twilio(accountSid, authToken);
+    try {
         const responseSMS = await client.messages
             .create({
-                from: '+13344543086',
+                from: '+13614503355',
                 to: '+91' + userMobileNumber,
                 body: `Your vehicle  ${vehicleNumber} has crossed ${tollPlaza} on ${date}\n${msg}`,
             })
         console.log(responseSMS.sid);
-            
+
     } catch (err) {
+        console.log(err)
         console.log('SMS NOT SENT');
     }
     return;

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import TollStart from './Components/TollStart';
 import TollUpload from './Components/TollUpload';
 import Home from './Components/Home';
+import './all_css/Navbar.css';
 import Guest from './Components/Guest'
 import GuestUpload from './Components/GuestUpload';
 import GuestDetails from './Components/GuestDetails';

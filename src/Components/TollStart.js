@@ -20,15 +20,6 @@ export default function TollStart(props) {
                             CHECK RECORDS
                     </Link>
                     </div>
-                    <div className="col-sm-5 m-1 d-flex justify-content-center">
-                        <Link type="button"id="button3" className="btn btn-light  d-flex w-75 justify-content-center">
-                        HOW TO
-                    </Link></div>
-                    <div className="col-sm-6 m-1 d-flex justify-content-center">
-                    <Link type="button"id="button4" className="btn btn-light d-flex w-75 justify-content-center">
-                        HELP
-                    </Link>
-                    </div>
                 </div>
             </div>
             </div>
