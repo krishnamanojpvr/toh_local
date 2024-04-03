@@ -8,7 +8,7 @@ from PIL import Image
 
 app = Flask(__name__)
 CORS(app)
-model = keras.models.load_model('best_model.h5')
+model = keras.models.load_model('best_model.keras')
 
 def preprocess_image(file):
     img = image.img_to_array(Image.open(file).convert('RGB').resize((64, 64)))
@@ -19,25 +19,20 @@ def preprocess_image(file):
 @app.route('/classify', methods=['POST'])
 def classify_image():
     try:
-        print("1234567890")
         setofresult = []
         files = request.files.getlist('image')
-        print("09874321")
-        print(type(files))
-        print(files)
         if not files:
             return jsonify({"error": "No files uploaded"})
         for file in files:
             processed_image = preprocess_image(file)
             predictions = model.predict(processed_image)
-            print(predictions)
             predicted_class = np.argmax(predictions)
-            print(predicted_class)
             class_labels = ["Cracked", "Normal"] 
-
+            rawres = float(predictions[0][predicted_class])*100
+            percentage = "{:.2f}%".format(rawres)
             result = {
                 "class": class_labels[predicted_class],
-                "confidence": float(predictions[0][predicted_class])
+                "confidence": percentage
             }
 
             setofresult.append(result)

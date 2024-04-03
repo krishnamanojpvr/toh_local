@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 export default function AboutUs(props) {
   props.setSignInButton(true);
@@ -102,16 +101,9 @@ export default function AboutUs(props) {
           
         </div>
         <div className="container col-md-6 d-flex" >
-          <div className="container bg-black rounded-4 p-2 mt-3 border border-white border-3  "style={{color:'white' , maxHeight:"470px"} }>
-            <h1>Contact Us On:</h1>
-            <div className="d-flex">
-              <Link to='mailto:pvrkmsbunny@gmail.com' target="_blank" rel="noopener noreferrer">
-                <span className="material-symbols-outlined" style={{ color: "red" }}>
-                  mail
-                </span>
-                
-              </Link>
-            </div>
+          <div className="container bg-black rounded-4 p-2 mt-3 border border-white border-3  "style={{color:'white' , maxHeight:"450px"} }>
+            <h1>Share your experience. . .</h1>
+            
             <form onSubmit={feedbackForm} id='feedback'>
             <div>
               <label classname="form-label">Name</label>

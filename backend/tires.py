@@ -13,8 +13,8 @@ import warnings
 warnings.filterwarnings('ignore')
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
-MAIN_PATH = "C:/Users/pvrkm/Programming/TOH/TOH_app/TireTextures/training_data"
-TEST_PATH = "C:/Users/pvrkm/Programming/TOH/TOH_app/TireTextures/testing_data"
+MAIN_PATH = "/home/manoj/prog/toh_local/backend/Tire Textures/training_data"
+TEST_PATH = "/home/manoj/prog/toh_local/backend/Tire Textures/testing_data"
 CLASSES = os.listdir(MAIN_PATH)
 NUM_CLASSES = len(CLASSES)
 NUM_TEST_IMAGES = len(os.listdir(os.path.join(TEST_PATH,"cracked")))+len(os.listdir(os.path.join(TEST_PATH,"normal")))
@@ -83,7 +83,7 @@ def compile_model(model, lr=0.000001):
     return model
 model=compile_model(model, lr=0.0001)
 def create_callbacks():
-    cpk_path = './best_model.h5'
+    cpk_path = './best_model.keras'
     checkpoint = ModelCheckpoint(
         filepath=cpk_path,
         monitor='val_categorical_accuracy',
